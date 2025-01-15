@@ -1,0 +1,295 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi/Satoshi-Light.otf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi/Satoshi-Regular.otf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi/Satoshi-Medium.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("../assets/fonts/Satoshi/Satoshi-Black.otf");
+  font-weight: 700;
+}
+// ================
+/* Poppins Black */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Poppins Black Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Poppins Bold */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Poppins Bold Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Poppins ExtraBold */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Poppins ExtraBold Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* Poppins ExtraLight */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* Poppins ExtraLight Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+/* Poppins Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Poppins Light */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Poppins Light Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Poppins Medium */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Poppins Medium Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Poppins Regular */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Poppins SemiBold */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Poppins SemiBold Italic */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Poppins Thin */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins/Poppins-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Din light */
+@font-face {
+  font-family: "Din";
+  src: url("../assets/fonts/Din/Din-Extralight.ttf");
+  font-weight: 300;
+}
+
+/* Din regular */
+@font-face {
+  font-family: "Din";
+  src: url("../assets/fonts/Din/Din-Regular.ttf");
+  font-weight: 400;
+}
+
+/* Din medium */
+@font-face {
+  font-family: "Din";
+  src: url("../assets/fonts/Din/Din-Medium.ttf");
+  font-weight: 500;
+}
+
+/* Din light */
+@font-face {
+  font-family: "Din";
+  src: url("../assets/fonts/Din/Din-Bold.ttf");
+  font-weight: 700;
+}
+
+/* Globals css variables */
+$primary: #ce1127;
+$error: #ce1127;
+/* end of the global css variables */
+
+// ================
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Satoshi", "Poppins", "Din";
+  @apply bg-[#171717] text-title-light dark:bg-bg-dark dark:text-title-dark;
+}
+
+.card-shadow{
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+}
+
+pre {
+  font-family: "Satoshi", "Poppins", "Din";
+  white-space: normal;
+}
+
+/* Start of the global styles */
+button,
+input,
+select,
+textarea,
+a {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #262626;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield !important;
+  }
+}
+/* End of the global styles */
+
+.input-wrapper-db {
+  @apply relative h-12 w-full overflow-hidden rounded-3xl border dark:border-none dark:bg-box-container-dark;
+  input {
+    @apply absolute bottom-0 end-0 start-0 top-0 h-full border-none bg-transparent text-title-light dark:text-title-dark;
+  }
+  .dp__main {
+    @apply h-full;
+    .dp__input_wrap {
+      @apply absolute h-full;
+    }
+  }
+}
+
+/* Start if the date picker components styles */
+.dp__today {
+  border: 1px solid $primary !important;
+}
+.dp__active_date {
+  background: $primary !important;
+}
+.dp__action_buttons {
+  gap: 10px;
+  .dp__action_button {
+    padding: 16px !important;
+    &.dp__action_select {
+      background: $primary !important;
+    }
+    &.dp__action_cancel {
+      &:hover {
+        border-color: $primary !important;
+      }
+    }
+  }
+}
+
+.date-error {
+  .dp__input {
+    border-color: $error !important;
+    border-style: solid !important;
+    &::placeholder {
+      color: $error !important;
+    }
+  }
+}
+/* End of the date picker styles */
