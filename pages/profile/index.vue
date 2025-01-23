@@ -13,7 +13,7 @@
     </div>
 
     <div class="bg-white dark:bg-box-container-dark card-shadow rounded-2xl p-5 grid grid-cols-12 gap-8">
-      <div class="order-2 col-span-12 xl:order-1 xl:col-span-9">
+      <div class="order-2 col-span-12 xl:order-1 xl:col-span-12">
         <div class="mb-7 last:mb-0">
           <button type="button" class="mb-4 flex items-center gap-2">
             <img src="/profile/icons/pinned.svg" class="dark:invert" />
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="order-1 col-span-12 xl:order-2 xl:col-span-3">
+      <div class="hidden order-1 col-span-12 xl:order-2 xl:col-span-3">
         <div
           class="sticky top-[15px] flex w-full items-center gap-3 overflow-x-auto pb-2.5 xl:block xl:h-[70vh] xl:overflow-y-auto xl:pb-0"
         >
@@ -187,6 +187,47 @@ const items = ref([
         to: "https://www.linkedin.com/company/egypt-mls/",
         pinned: false,
       },
+    ],
+  },
+  {
+    id: 8415,
+    category:
+      locale.value === "ar"
+        ? "منتجاتنا"
+        : "Egypt MLS Products",
+    cards: [
+      {
+        id: "634",
+        image: "https://arabmls.org/wp-content/uploads/2023/11/1618f50b3a6df61a6e7eacbadcd014a7.png",
+        title: "Arab MLS",
+        description: "arabmls.org",
+        to: "https://arabmls.org/",
+        pinned: false,
+      },
+      {
+        id: "2347",
+        image: "/logo/egypt-platform-logo-light.svg",
+        title: locale.value === "ar" ? "منصة مصر العقارية" : "Egyptian Real Estate Platform",
+        description: "realestate.gov.eg",
+        to: "/logo/egypt-platform-logo-light.svg",
+        pinned: false,
+      },
+      {
+        id: "23448",
+        image: "/icons/agent-fallback.png",
+        title: locale.value === "ar" ? "ابحث عن وكيل" : "Find An Agent",
+        description: "",
+        to: "https://realestate.gov.eg/Agents",
+        pinned: false,
+      },
+      // {
+      //   id: "23441",
+      //   image: "/profile/linkedin.svg",
+      //   title: locale.value === "ar" ? "لينكدإن" : "Linked in",
+      //   description: "Egypt MLS",
+      //   to: "https://www.linkedin.com/company/egypt-mls/",
+      //   pinned: false,
+      // },
     ],
   },
 ]);

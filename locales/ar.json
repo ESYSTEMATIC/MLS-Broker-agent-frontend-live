@@ -387,6 +387,12 @@
   },
   "ERRORS": {
     "fNameRequired": "الاسم الأول مطلوب",
+    "invalidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
+    "passwordMinLength": "يجب أن تكون كلمة المرور 8 أحرف على الأقل.",
+    "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل.",
+    "passwordLowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل.",
+    "passwordNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.",
+    "passwordSpecialChar": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل ( $، !، %، *، ؟، &).",
     "lNameRequired": "الاسم الآخير مطلوب",
     "phoneNumberRequired": "رقم الهاتف مطلوب",
     "phoneNumberLength": "يجب أن يحتوي رقم الهاتف على {number} من الأرقام",
@@ -444,7 +450,6 @@
     "branchRequired": "الفرع مطلوب",
     "selectCompanyBranch": "اختر فرع من فروع الشركة",
     "nationalIdMustBe14Numbers": "الرقم القومي يجب أن يكون 14 رقم",
-    "passwordMinLength": "كلمة المرور يجب ألا تقل عن 6 حروف أو ارقام",
     "newPasswordMatchesOldOne": "كلمة المرور الجديدة تطابف كلمة المرور الجديدة",
     "officeNameRequired": "اسم المكتب مطلوب"
   },

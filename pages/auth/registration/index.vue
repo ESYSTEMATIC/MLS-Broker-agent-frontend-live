@@ -14,7 +14,7 @@
   </Teleport>
 
   <div v-if="!paymentModal" class="flex flex-col items-center justify-center">
-    <h2 class="mb-2 text-5xl font-bold">
+    <h2 class="my-2 text-5xl  pt-3 text-white font-bold">
       {{ $t("TITLES.activate_your_membership") }}
     </h2>
 
@@ -29,7 +29,7 @@
       >
         <button
           type="button"
-          class="col-span-12 flex items-center gap-2 pb-5 pe-7 duration-200 lg:col-span-4 xl:border-b-2 xl:pb-3"
+          class="col-span-12 flex items-center gap-2 pb-5 pe-7 duration-200 lg:col-span-6 xl:border-b-2 xl:pb-3"
           :class="step === 1 ? 'border-primary' : 'border-text-[#9FA7A8]'"
           @click="step = 1"
           disabled
@@ -59,7 +59,7 @@
 
         <button
           type="button"
-          class="col-span-12 flex items-center gap-2 pb-5 pe-7 duration-200 lg:col-span-4 xl:justify-center xl:border-b-2 xl:pb-3"
+          class="col-span-12 flex items-center gap-2 pb-5 pe-7 duration-200 lg:col-span-6 xl:justify-center xl:border-b-2 xl:pb-3"
           :class="step === 2 ? 'border-primary' : 'border-text-[#9FA7A8]'"
           @click="step = 2"
           disabled
@@ -87,7 +87,7 @@
           </span>
         </button>
 
-        <button
+        <!-- <button
           type="button"
           class="col-span-12 flex items-center gap-2 pb-5 pe-7 duration-200 lg:col-span-4 xl:justify-center xl:border-b-2 xl:pb-3"
           :class="step === 3 ? 'border-primary' : 'border-text-[#9FA7A8]'"
@@ -103,11 +103,11 @@
           <span :class="step === 3 ? 'text-primary' : 'text-[#9FA7A8]'">
             {{ $t("TITLES.training_videos") }}
           </span>
-        </button>
+        </button> -->
       </div>
 
       <template v-if="step == 1">
-        <div class="mb-5 flex items-center justify-center">
+        <div class="mb-8 flex items-center justify-center">
           <label
             v-for="(item, idx) in packages"
             :key="idx"
@@ -119,9 +119,9 @@
                 : 'border-[#ddd]'
             "
           >
-            <h3 class="mb-4 text-center">{{ item.name }}</h3>
+            <h3 class="text-white mb-4 text-center">{{ item.name }}</h3>
 
-            <p class="text-center text-xl font-medium">
+            <p class="text-white text-center text-xl font-medium">
               {{ item.price }} {{ $t("TITLES.AED") }} / {{ $t("TITLES.user") }}
             </p>
 
@@ -130,12 +130,12 @@
             <div class="h-[100px]">
               <div class="mb-4 flex items-center gap-2">
                 <img src="/icons/checked.svg" alt="icon" />
-                <span>{{ item.description }}</span>
+                <span class="text-white">{{ item.description }}</span>
               </div>
 
               <div class="flex items-center gap-2">
                 <img src="/icons/checked.svg" alt="icon" />
-                <span
+                <span class="text-white"
                   >{{ item.duration_days }}
                   {{ $t("TITLES.day_duration") }}</span
                 >
@@ -152,7 +152,7 @@
           </label>
         </div>
 
-        <div class="flex items-center justify-end">
+        <div class="flex items-center mb-3 justify-end">
           <GlobalsButton
             @handleClick="SubmitApplicationFees()"
             :text="$t('BUTTONS.next')"
@@ -161,7 +161,7 @@
         </div>
       </template>
 
-      <template v-if="step == 3">
+      <!-- <template v-if="step == 3">
         <div class="mb-10 w-[85vw]">
           <div class="mb-20 grid grid-cols-12 gap-5">
             <div class="col-span-10">
@@ -218,7 +218,7 @@
             {{ $t("BUTTONS.next") }}
           </button>
         </div>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
@@ -402,7 +402,7 @@ watch(
       getPlan();
       getPackages();
     } else if (val == 3) {
-      getVideos();
+      confirmTraining();
     }
   },
   { deep: true, immediate: true },
@@ -456,8 +456,8 @@ async function onPaymentSuccess() {
     method: "POST",
   })
     .then(() => {
-      step.value = 3;
       useCookie("status").value = "training";
+      confirmTraining();
       toast.success(i18n.t("TEXTS.paidSuccessfully"));
     })
     .catch((e) => {

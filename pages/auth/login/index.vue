@@ -63,6 +63,24 @@ const loggedInPassword = ref("");
 const userPhone = ref(null);
 
 const loginLoading = ref(false);
+
+async function handleEmailConfirmation(email) {
+  await $fetch("/account/sendVerificationCode", {
+    baseURL,
+    headers,
+    params: {
+      email,
+    },
+  })
+    .then(() => toast.success(i18n.t("TEXTS.codeResentSuccessfully")))
+    .catch((e) => {
+      console.error(e);
+
+      toast.error(e.response._data.Error[0]);
+    })
+    .finally(() => (emailConfirmationLoading.value = false));
+}
+
 async function handleLogin(values) {
   loginLoading.value = true;
 
@@ -91,11 +109,18 @@ async function handleLogin(values) {
     })
     .catch((e) => {
       console.error(e);
-
+      if(e.response._data.Error[0].includes('Account Email unverified')){
+        toast.error('Please verify your account! An email has been sent to you!');
+        handleEmailConfirmation(values.email)
+        return 
+      }
       toast.error(e.response._data.Error[0]);
     })
     .finally(() => (loginLoading.value = false));
 }
+
+
+
 /* End of the function that handle login */
 
 /* Start of the function that handle forgot password */
@@ -284,6 +309,7 @@ async function handleVerifyCode() {
       })
         .then((res) => {
           if (loggedIn.value) {
+            localStorage.setItem('temporaryProfileData' , JSON.stringify(res.data.user))
             authStore.setProfile(res.data.user);
             authStore.setVerificationData(res.data);
 
@@ -522,7 +548,10 @@ watch(
             </template>
 
             <template v-else-if="form === 'forgot-password'">
-              {{ $t("TITLES.forgotPasswordTitle") }}
+              <div class="flex items-center gap-2">
+                <img @click="form= 'login'" src="/profile/icons/arrow-left.svg" class="w-[25px] cursor-pointer" alt="">
+                {{ $t("TITLES.forgotPasswordTitle") }}
+              </div>
             </template>
 
             <template v-else-if="form === 'verify-code'">
@@ -535,6 +564,7 @@ watch(
           </h5>
 
           <p class="text-text-dark dark:text-text-light">
+
             <template v-if="form === 'login'">
               {{ $t("TEXTS.loginText") }}
             </template>

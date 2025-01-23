@@ -4,18 +4,18 @@
   >
     <div class="flex flex-col items-center justify-center">
       <div class="md-4">
-        <img
+        <!-- <img
           :src="
             data.application_status == 'pending'
               ? '/icons/waiting.svg'
               : data.application_status == 'approved' && '/icons/approved.svg'
           "
           alt="icon-waiting"
-        />
+        /> -->
       </div>
 
       <div class="mb-8">
-        <h2 class="mb-1 text-center text-2xl font-bold">
+        <h2 class="mb-1 text-white text-center text-2xl font-bold">
           {{
             data?.application_status == "pending"
               ? $t("TITLES.waitingForApproval")
@@ -37,7 +37,7 @@
       <div>
         <button
           @click="$router.push(localePath('/auth/registration'))"
-          type="button"
+          type="button" v-if="data.application_status !== 'pending'"
           :disabled="data.application_status == 'pending'"
           class="w-[450px] rounded-full bg-[#CE1127] py-3 font-medium text-white disabled:bg-[#5C5C5C1A] disabled:text-[#5A5A5A]"
         >

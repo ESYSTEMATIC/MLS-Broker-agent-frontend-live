@@ -4,7 +4,21 @@
     :class="locale == 'en' ? 'bg-right-bottom' : 'bg-left-bottom'"
   >
     <div class="h-[100px] flex items-center ms-10">
-      <img src="/logo/light-arab-mls.svg" alt="logo" />
+      <!-- <GlobalsFullLightLogo /> -->
+      <img
+      src="/public/logo/egypt-mls-dark.svg"
+      class="h-[70px]"
+      alt="light-logo"
+      :draggable="false"
+    />
+
+    <!-- <img
+      v-else
+      src="/public/logo/egypt-mls-light.svg"
+      class="h-[70px]"
+      alt="light-logo"
+      :draggable="false"
+    /> -->
     </div>
     <slot />
   </div>

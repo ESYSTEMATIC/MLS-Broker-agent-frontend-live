@@ -113,7 +113,7 @@
     <!-- End of the buy token model -->
 
     <div
-      class="mb-6 flex flex-wrap items-center justify-between rounded-2xl bg-white card-shadow px-6 py-4 dark:bg-box-container-dark"
+      class="mb-6 flex flex-wrap items-center justify-between rounded-2xl light:bg-white card-shadow px-6 py-4 dark:bg-box-container-dark"
     >
       <div>
         <h3 class="mb-2 text-primary text-2xl font-bold leading-9">
@@ -139,7 +139,7 @@
       </div>
     </div>
 
-    <div class="rounded-2xl bg-white card-shadow px-6 py-4 min-h-[50vh]">
+    <div class="rounded-2xl light:bg-white card-shadow px-6 py-4 min-h-[50vh]">
       <div class="mb-6">
         <GlobalsBaseFilter :items="dataFilter" />
       </div>

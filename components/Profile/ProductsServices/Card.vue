@@ -1,10 +1,10 @@
 <template>
   <div
-    class="card relative z-[10] w-[260px] min-h-[200px] overflow-hidden rounded-2xl border p-4 transition-all dark:border-box-container-dark dark:bg-[#2c2c2c]"
+    class="card relative z-[10] w-[250px] min-h-[200px] overflow-hidden rounded-2xl border p-4 transition-all dark:border-box-container-dark dark:bg-[#2c2c2c]"
   >
     <button
       @click="$emit('makePinUnPin', card.id)"
-      class="pin-btn group absolute end-1 top-1 flex size-11 items-center justify-center rounded-full bg-[#FFF4F4] transition-all hover:bg-primary dark:bg-[#FFF4F4] hover:dark:bg-primary"
+      class="pin-btn group absolute end-1 top-1 flex size-11 items-center justify-center rounded-full bg-[#b4922c1f] transition-all hover:bg-primary dark:bg-[#b4922c1f] hover:dark:bg-primary"
       type="button"
     >
       <img
@@ -30,7 +30,7 @@
                 : '/logo/egypt-logo-light.svg'
           "
           :alt="card.title"
-          class="h-[116px] object-contain py-3 dark:border-[#676767]"
+          class="h-[116px] object-contain py-3 px-2 dark:border-[#676767]"
           draggable="false"
         />
       </ClientOnly>
@@ -54,7 +54,7 @@
         <NuxtLink
           :to="card.to"
           target="_blank"
-          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#FFF4F4] transition-all hover:bg-primary dark:bg-[#FFF4F4] hover:dark:bg-primary"
+          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#b4922c1f] transition-all hover:bg-primary dark:bg-[#FFF4F4] hover:dark:bg-primary"
         >
           <font-awesome-icon
             :icon="`fas fa-arrow-${locale === 'ar' ? 'left' : 'right'}`"

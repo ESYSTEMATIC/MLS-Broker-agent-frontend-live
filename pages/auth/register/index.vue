@@ -49,17 +49,27 @@ const roleOptions = ref([
     name: i18n.t("INPUTS.broker"),
   },
 ]);
-
+const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
 const registerSchema = yup.object().shape({
   name: yup.string().required(i18n.t("ERRORS.nameRequired")),
   email: yup
     .string()
     .required(i18n.t("ERRORS.emailRequired"))
     .email(i18n.t("ERRORS.invalidEmail")),
-  phone: yup.string().required(i18n.t("ERRORS.phoneNumberRequired")),
-  secondPhone: yup.string().required(i18n.t("ERRORS.phoneNumberRequired")),
+  phone: yup
+    .string()
+    .required(i18n.t("ERRORS.phoneNumberRequired"))
+    .matches(phoneRegex, i18n.t("ERRORS.invalidPhoneNumber")),
+  // secondPhone: yup.string().required(i18n.t("ERRORS.phoneNumberRequired")),
   role: yup.string().required(i18n.t("ERRORS.roleRequired")),
-  password: yup.string().required(i18n.t("ERRORS.passwordRequired")),
+  password: yup
+    .string()
+    .required(i18n.t("ERRORS.passwordRequired"))
+    .min(8, i18n.t("ERRORS.passwordMinLength"))
+    .matches(/[A-Z]/, i18n.t("ERRORS.passwordUppercase"))
+    .matches(/[a-z]/, i18n.t("ERRORS.passwordLowercase"))
+    .matches(/\d/, i18n.t("ERRORS.passwordNumber"))
+    .matches(/[@$!%*?&]/, i18n.t("ERRORS.passwordSpecialChar")),
   confirmPassword: yup
     .string()
     .when("password", (password, field) =>
@@ -86,7 +96,7 @@ async function handleRegister(values) {
       email: values.email,
       country_code_phone: "+20",
       phone: values.phone.replace(/^[0.]+/, ""),
-      second_phone: values.secondPhone.replace(/^[0.]+/, ""),
+      second_phone: values.phone.replace(/^[0.]+/, ""),
       password: values.password,
       type: values.role,
     },
@@ -97,6 +107,7 @@ async function handleRegister(values) {
       form.value = "email-confirmation";
 
       registeredEmail.value = values.email;
+      handleEmailConfirmation()
     })
     .catch((e) => {
       console.error(e);
@@ -251,7 +262,7 @@ const changeLanguage = ref(false);
               />
             </div>
 
-            <div class="col-span-12 xl:col-span-6">
+            <div class="col-span-12 xl:col-span-12">
               <InputsBaseInput
                 id="phoneNumber"
                 name="phone"
@@ -261,7 +272,7 @@ const changeLanguage = ref(false);
               />
             </div>
 
-            <div class="col-span-12 xl:col-span-6">
+            <!-- <div class="col-span-12 xl:col-span-6">
               <InputsBaseInput
                 id="secondPhoneNumber"
                 name="secondPhone"
@@ -269,7 +280,7 @@ const changeLanguage = ref(false);
                 :label="$t('LABELS.secondPhone')"
                 :placeholder="$t('INPUTS.secondPhonePlaceholder')"
               />
-            </div>
+            </div> -->
 
             <div class="col-span-12">
               <InputsValidSelect

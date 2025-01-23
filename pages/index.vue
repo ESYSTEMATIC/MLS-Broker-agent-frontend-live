@@ -8,7 +8,9 @@ useHead({
 
 <template>
   <div class="bg-white text-title-light dark:bg-bg-dark dark:text-title-dark">
-    <SectionsHome class="hidden xl:block" />
+
+    
+    <!-- <SectionsHome class="hidden xl:block" />
 
     <SectionsHomeMedia class="block xl:hidden" />
 
@@ -28,6 +30,6 @@ useHead({
 
     <SectionsFAQ />
 
-    <SectionsContactUs />
+    <SectionsContactUs /> -->
   </div>
 </template>

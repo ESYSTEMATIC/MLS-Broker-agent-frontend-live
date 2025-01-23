@@ -12,7 +12,7 @@
       </p>
     </div>
 
-    <div class="rounded-2xl bg-white card-shadow px-6 py-4">
+    <div class="rounded-2xl light:bg-white card-shadow px-6 py-4">
       <div class="mb-6">
         <GlobalsBaseFilter :items="dataFilter">
           <template #buttons>

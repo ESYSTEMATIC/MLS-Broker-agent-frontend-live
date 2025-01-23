@@ -100,6 +100,7 @@
       >
         <form class="grid grid-cols-12 gap-5">
           <div class="col-span-12 xl:col-span-6">
+            <!-- {{companiesOptions}} -->
             <InputsValidAutoComplete
               id="company"
               name="company"
@@ -154,13 +155,13 @@
         :initialValues="principlesInitialValues"
       >
         <form class="grid grid-cols-12 gap-5">
-          <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <!-- <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <InputsBaseInput
               id="fName"
               name="fName"
               :label="$t('LABELS.fName')"
               :placeholder="$t('INPUTS.fNamePlaceholder')"
-              isChar
+              isChar disabled :value="formPopulateData.name"
             />
           </div>
 
@@ -182,7 +183,7 @@
               :placeholder="$t('INPUTS.lNamePlaceholder')"
               isChar
             />
-          </div>
+          </div> -->
 
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <InputsValidDate
@@ -242,7 +243,7 @@
             :placeholder="$t('INPUTS.phoneNumberPlaceholder')"
           />
         </div> -->
-          <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <div class="col-span-12 md:col-span- xl:col-span-8">
             <InputsBasePhoneInput
               name="direct_phone_number"
               :label="$t('LABELS.phoneNumber')"
@@ -251,7 +252,7 @@
               isNumber
             />
           </div>
-
+<!-- 
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <InputsBaseInput
               id="second_email"
@@ -259,7 +260,7 @@
               :label="$t('LABELS.email')"
               :placeholder="$t('INPUTS.emailPlaceholder')"
             />
-          </div>
+          </div> -->
 
           <div class="col-span-12 md:col-span-6">
             <label
@@ -329,12 +330,12 @@
                 <input
                   type="radio"
                   id="realEstateEmail"
-                  value="email"
+                  value="Commercial"
                   class="size-[20px] cursor-pointer"
                   v-model="realEstate"
                 />
 
-                <span>{{ $t("INPUTS.email") }}</span>
+                <span>{{ $t("INPUTS.commercial") }}</span>
               </label>
 
               <label
@@ -354,7 +355,7 @@
             </div>
           </div>
 
-          <div class="col-span-12 md:col-span-7">
+          <!-- <div class="col-span-12 md:col-span-7">
             <label for="ensureOfficeAddress" class="mb-2 block font-medium">{{
               $t("LABELS.ensureOfficeAddress")
             }}</label>
@@ -399,7 +400,7 @@
               :label="$t('LABELS.ifNotWhere')"
               :placeholder="$t('LABELS.ifNotWhere')"
             />
-          </div>
+          </div> -->
 
           <div class="col-span-12 md:col-span-6">
             <InputsBaseInput
@@ -552,48 +553,107 @@
         <div class="mb-5 rounded-lg border border-inputBg-dark p-3.5">
           <div class="max-h-[200px] overflow-auto">
             <pre>
-All services and dealings specialized for platform www.arabmls.org, are subject to the following conditions and terms:
-1-Presented and Submitted Services and Information:
-All services and information presented and submitted from / to this site are subject to policy of the usage terms, and all information stated in this site are specialized for the general information of the site visitors, and they don’t mean to be relied on, by any person or entity for any reason, as substitute or instead of the vocational counseling.
-
-2- Protection of Personal Information:
-To learn about all details specialized for and related to collection and usage of the personal information, please, read privacy policy specialized for www.arabmls.org
-
-3- Usage of Password to Access to Some Services:
-*In case of issuance of platform www.arabmls.org, for you and /or your partners, as illustrated in rules and regulations, (to be kindly learned about), (jointly and individually referred to hereunder as “you” or “your/specialized for you”) of account or password or any other safe access to reach specific areas of the site, or to attain specific privileges and features in the site, you are totally fully and solely responsible for preserving and keeping confidentiality of your password, and you approve and comply with your total full responsibility for all procedures taken under your password, including for example without limitation, the unlicensed and unauthorized usage of this site or access to it by any other third party, plus you approve that platform www.arabmls.org didn’t endure, and doesn’t currently endure or won’t later endure any responsible for that.
-* You approve, comply and admit that you are responsible for each usage of system / platform www.arabmls.org by you or your partners, and that you remain responsible before platform www.arabmls.org for any unlicensed and unauthorized usage by you and /or your partners.
-* You approve, comply and admit validity and authenticity of the documents presented and submitted by you without platform www.arabmls.org currently or later bearing any responsibility for any matters.
-
-4- Usage of the Platform / Site by Kids:
-Site / platform www.arabmls.org is neither directed to nor specialized for being used by kids under 18 years old, “the kid” or “kids”, please, read the privacy policy of www.arabmls.org
-
-5- Content of the Platform / Site:
-*All materials and information on the platform / site, including for example without limitation, all texts, drawings, photos, artistic works and the like, in addition to the trademarks, marks of service, logos and slogans in our content, are exclusive intellectual property of site / platform www.arabmls.org, and its affiliated companies only, and are subject to the legal protection according to laws of rights of the intellectual property, printing, publishing and trademarks in Arab Republic of Egypt.
-* and the purpose of their publishing and saving for you is for your information and personal usage only, and they can be neither used nor copied, reproduced, distributed, transferred, transported, announced, declared, showed, displayed, sold, licensed or exploited by any means and /or for any other purposes whatever they are without getting a prior written consent and approval from www.arabmls.org
-* You approve, admit and comply with that, without www.arabmls.org currently or later bearing any responsibility for any matters, and in case of violating that, you are complied with paying to www.arabmls.org, a convenient suitable compensation for the damage and harm caused to it.
-
-6- Links of Other Sites:
-Site / platform www.arabmls.org contains or may contain links of websites and /or platforms affiliated to external foreign authorities to help you directly access to these sites through the platform / site, however platform / site www.arabmls.org is irresponsible for content of any website and /or platforms affiliated to external foreign authorities, and usage of this site and /or platforms is subject to their privacy politics and usage terms without platform / site www.arabmls.org currently or later bearing the least responsibility.
-
-7- Disclaimer of Guarantees and Responsibility/Liability Constraints:
-You approve, comply and admit that this site / platform is presented and submitted according to its content, and that site / platform www.arabmls.org and its affiliated companies, whether established or to be later established, disclaim, neither comply nor endure all legal explicit or implicit guarantees or statements, for example:
-*Mistakes and/or Lapses and /or content inaccuracy
-* Personal injury or properties damages resulting from or on the occasion of using the site / platform www.arabmls.org
-* Any unlicensed and unauthorized access and /or hacking or breakthrough of our safe servers
-* Any unlicensed and unauthorized access and /or hacking or breakthrough of personal information and /or financial information saved and stored herein
-* Any breakdown and /or discontinuity of remittance to or from our site
-* Any mistakes in instructions and /or mistakes in design and /or problems of security or viruses or what is known as Trojan horses viruses or similar viruses, can be transferred to or through our electronic site by means of any third party. In general, site / platform www.arabmls.org and its affiliated companies, whether established or to be later established, are totally inclusively and by no means, irresponsible for any direct or indirect, explicit or implicit, accessory or special or penal punitive damages or other damages of any kind, whether resulting from using or incapability of using our content and /or site and /or platform and /or any products or services submitted and presented through us and /or our affiliated companies, whether established or to be later established, and /or whether this responsibility is based on damage and /or the contract and /or the negligence and carelessness or others, even if we are informed about and notified of these actual or potential damages, and you approve, comply and admit that the only solution before you is to stop using our content or our electronic site without making site / platform www.arabmls.org and its affiliated companies, whether established or to be later established, liable to any responsibility or currently or later asking them for a compensation.
-
-8- Our Rights:
-Site / platform www.arabmls.org and its affiliated companies, whether established or to be later established, keep the right to take any and all necessary procedures, search for any and all available remedies to prevent the unlicensed and unauthorized usage of our content and /or website, including for example without limitation, the right to take all suitable legal procedures, get judicial and /or financial compensations for any acts or deeds representing violation of our intellectual property rights and /or misusage of our content or our site / platform in one way or another. You approve, admit and comply with compensating www.arabmls.org and its affiliated companies, whether established or to be later established, for any and /or all damages, or costs, expenditures, outlays or disbursements endured by www.arabmls.org and /or its affiliated companies, whether established or to be later established, including legal practice honorariums, costs of procedures whether against you or against third party as a result of using your password and this statement is final irrevocable and not subject to judicial control. Site / platform www.arabmls.org has right to amend and /or change policy of the usage terms anytime and site / platform www.arabmls.org will notify you of any such changes or amendments by publishing these changes and amendments on this site / platform.
-
-9- The Applicable Law:
-By visiting site / platform www.arabmls.org, you approve, comply and admit that any disputes between you and www.arabmls.org and /or its affiliated companies, whether established or to be later established, arising because of usage and /or your access to our content and /or our electronic site and /or the usage terms specialized for us and /or our politics, are all subject to laws of Arab Republic of Egypt regardless their contradiction to any other laws and /or conditions, and Cairo Courts only, in whose division our headquarter is located, are judicially competent to examine, discuss and resolve any dispute.
-
-10- Means of Communication and Contact with Site / Platform www.arabmls.org:
-If you have any questions or inquiries about these terms and conditions or our politics and you want to get more information, you can contact us via email or phone.
-          </pre
-            >
+              <h3>All services and dealings specialized for platform <a href="http://www.arabmls.org">www.arabmls.org</a> are subject to the following conditions and terms:</h3>
+              
+              <ol>
+                <li>
+                  <strong>Presented and Submitted Services and Information:</strong>
+                  <ul>
+                    <li>All services and information presented on this site are subject to the usage terms policy.</li>
+                    <li>
+                      Information provided is for general purposes only and should not be relied on as a substitute for professional counseling.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Protection of Personal Information:</strong>
+                  <ul>
+                    <li>
+                      Refer to the <a href="http://www.arabmls.org">privacy policy</a> for details on the collection and usage of personal information.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Usage of Password to Access Some Services:</strong>
+                  <ul>
+                    <li>If issued a password or secure access, you are responsible for its confidentiality.</li>
+                    <li>
+                      Unauthorized access or use of the site through your credentials is solely your responsibility.
+                    </li>
+                    <li>All submitted documents must be valid, with no liability on the platform for inaccuracies.</li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Usage of the Platform/Site by Kids:</strong>
+                  <ul>
+                    <li>This platform is not intended for use by individuals under 18 years old.</li>
+                    <li>Please review the <a href="http://www.arabmls.org">privacy policy</a>.</li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Content of the Platform/Site:</strong>
+                  <ul>
+                    <li>All materials, including text, images, and trademarks, are the exclusive intellectual property of the platform.</li>
+                    <li>
+                      Materials may not be copied, reproduced, distributed, or exploited without prior written consent from the platform.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Links to Other Sites:</strong>
+                  <ul>
+                    <li>
+                      The platform may contain links to external sites but is not responsible for their content or privacy policies.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Disclaimer of Guarantees and Responsibility/Liability Constraints:</strong>
+                  <ul>
+                    <li>The platform is provided "as is," with no guarantees for accuracy or reliability.</li>
+                    <li>
+                      The platform disclaims liability for damages resulting from unauthorized access, data breaches, or site interruptions.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Our Rights:</strong>
+                  <ul>
+                    <li>
+                      The platform reserves the right to take legal action for unauthorized use or violation of its intellectual property rights.
+                    </li>
+                    <li>
+                      Users must compensate the platform for any damages caused by misuse or violations.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>The Applicable Law:</strong>
+                  <ul>
+                    <li>
+                      All disputes are subject to the laws of the Arab Republic of Egypt and fall under the jurisdiction of Cairo courts.
+                    </li>
+                  </ul>
+                </li>
+                
+                <li>
+                  <strong>Means of Communication and Contact:</strong>
+                  <ul>
+                    <li>
+                      For questions or inquiries about these terms, contact us via email or phone.
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+              </pre>              
           </div>
         </div>
 
@@ -604,42 +664,96 @@ If you have any questions or inquiries about these terms and conditions or our p
         <div class="mb-5 rounded-lg border border-inputBg-dark p-3.5">
           <div class="max-h-[200px] overflow-auto">
             <pre>
-Platform ARABMLS (referred to, by personal pronouns, I or we or ARABMLS) seriously deals with your privacy, and it complies with protecting privacy of all visitors and contributors, participating in our website www.arabmls.org or any application which can be created by it besides the electronic site or platform, related to the personal information, demographic information, visitor computer information, when you visit our electronic site or contribute to our interactive surveys, our promotional ads and offers, and the services available through the platform “platform services”. We illustrate hereunder our privacy policy “the policy”, determining the way of treating all related to your personal information with which you provide us, and this phrase, “personal information”, means the information which enable us to know your identity and how to use these information, plus how to get copies of the personal information sent to us, and how you can check and verify their accuracy, and how you can ask to omit your personal information which can be known from our databases. Please, carefully read this policy, as it includes important information including a resume about us and how to collect, store, use and share the information by access to the platform or using our platform services or by expressing your consent and approval by another way other than that, you approve and accept – when necessary – to collect, use, transmit and transfer your information as stipulated in this policy, and if you don’t accept this policy terms, you can’t use the platform and/or the services and/or the site. This policy is complementary and supplement however isn’t substitute to the notices and other politics. ARABMLS frankly and explicitly keeps right to amend or change any or all terms and conditions of the privacy policy and any of these amendments or changes are published on the electronic site. These amendments and changes are valid and effective as of date of their publicity on this electronic site.
-
-Kinds of Collected Information:
-1-Personal Information and Demographic Information:
-When you visit the electronic site and/or the platform or contribute to our interactive surveys and promotional ads and offers, we collect the personal information only like: name, address, phone no, or email address, whereas the demographic information are as the postal code, age group, income bracket, education level, voluntarily presented and submitted to us by you, replying to our demands determined for you to do that. ARABMLS mainly uses the personal and demographic information for our internal commercial business and marketing purposes to enable us to comprehend interests of our customers in a better way, and send you information about our products and services. The website contains links of other sites with which ARABMLS doesn’t share your personal information as we are irresponsible for that. ARABMLS can provide from time to time, personal information and/or demographic information voluntarily submitted and presented to third parties, providing products and services to us and/or to our customers, in addition, to third parties, neither affiliated nor subordinate to us, offering products or services which can matter to our customers, or if we believe that the disclosure or revelation is necessary for public interest and benefit, sometimes, we are legally complied with disclosing and revealing your personal information. By voluntarily providing us with the personal and demographic information, you approve our usage of your personal information as previously illustrated. You shouldn’t provide us with any personal or demographic information you don’t want to disclose or reveal to us, as if you decide not to provide us with specific personal or demographic information, your ability to access to our electronic site and its offer isn’t then affected, however in absence or lack or inexistence of specific personal information, determining and proving or confirming and assuring your identity or determining your site, or demographic information related to the interactive survey or the determined promotional ad or offer to which you contribute, you may not receive a product or another information from us to contribute to such interactive surveys, and promotional ads and offers. If you want to get copy of your personal information from us to review and audit their accuracy, make any corrections, or if you don’t want to use your personal information now or anytime later, please, inform and notify us in a written notification, and we will exert the reasonable efforts to comprehend your demand.
-
-2- Visitor Computer Information:
-The website can use as several websites, preferable to you, “cookies” to collect specific information from computer you use to access to our electronic site, which enable us to know your computer device every time you reach our electronic site through it. Our cookies can collect information about your computer device, how and when you use it to access to our electronic site. Using cookies enables us to facilitate access to specific sections in our electronic site. Sometimes, we can collect your personal information with our visitor computer information until we are able to allocate your usage of our electronic site and make your visit more fun.
-
-3- Employment Inquiries:
-The personal information presented and submitted to us are to be used related to the employment inquiries only in process of employment.
-
-4- The Security:
-ARABMLS will take reasonable precautionary measures to protect your personal information from loss or misusage or change, and deputies of ARABMLS who can access to your personal information, are asked to keep these information confidential and secret and they aren’t allowed to use these information for any other purpose, but execution and implementation of services presented and submitted by them on behalf of us.
-
-5- Secure Access to Photographic Identification:
-In case of issuance of ARABMLS for you and your partners, as determined in rules and regulations of ARABMLS, account or password or another secure access device (password) for more access to specific areas of the electronic site, or access to specific privileges and features for this electronic site, you are complied with providing ARABMLS with photographic identity card, issued from the government, including for example without limitation, the national card no, driving license, and passport to assure and confirm your identity. The photographic identity cards submitted and presented to ARABMLS are to be used related to the secure access to the website only to assure and confirm your identity and authorize you to access to secure areas in this electronic site. ARABMLS doesn’t present or submit the information stated in the photographic identity card to third parties except to the legally required extent or to the extent required by the legal procedures.
-
-6- The Children:
-The site is undirected to be used and unspecialized for usage by children/child under 18 years old. We purposely neither collect nor accept personal information from children without prior consent and approval or notice of both parents, including the father’s opportunity to use the information and contribute to the activity. If we receive anytime personal information from children without prior consent and approval of both parents, we will use these information for only direct reply to this child, and our reply will include notice that we won’t contact this child unless we receive proved and checked consent and approval of both parents, in addition to, information to the father about how to contact us to whether present or submit this consent or approval or get more information.
-
-7- Contacting www.arabmls.org :
-If you have any questions about declaration of this privacy or this site, or if you want to get more information about www.arabmls.org , you can contact us by email or post or phone: ------------------------------------------------------------------
-
-8- To Complete Contribution to www.arabmls.org, I admit and approve the following:
-1- I approve compliance with all related regulations, rules and other contribution liabilities, especially these liabilities
-*Paying membership fees
-And I admit that I learned about and approved schedule of fees, and I can’t by no means, ask to regain amount of the contribution fees
-*I assure and confirm that I will actively do my best to operate my real estate commercial business activities including, offering services of the real estate sale and purchase and/or approving the real estate offers of ARABMLS, and listing the real estate properties of kind submitted and presented to ARABMLS.
-2- I approve continuity of contributing to these activities during my participation in ARABMLS and if I don’t comply with these liabilities, my membership is suspended or terminated.
-3- In addition to that, I approve compliance with rules, regulations and systems of multi-schedules service, and I also approve that I am totally fully responsible for any violations caused to these rules and regulations by me or by any of my partners.
-4- I admit, comply with and understand that the training course must be completed, and all dues and fees are to be paid at time of submitting and presenting the demand, and any training required for continuity of my membership in ARABMLS, is to be complied with.
-5- I admit validity and authenticity of all documents presented and submitted by me to ARABMLS and I am legally responsible for any documents or any content I post on the site of ARABMLS without ARABMLS currently or later bearing the least responsibility.
-also this content
-          </pre
-            >
+              <h2>Privacy Policy of ARABMLS</h2>
+              <p>
+              The platform ARABMLS (referred to as "I," "we," or "ARABMLS") takes your privacy seriously and complies with protecting the privacy of all visitors and contributors to our website <a href="https://www.arabmls.org">www.arabmls.org</a> or any application associated with it. This policy outlines how we collect, use, store, and share your information.
+              </p>
+              <p>
+              By accessing the platform or using our services, you agree to the terms of this privacy policy. If you disagree, you should refrain from using the platform and its services. ARABMLS reserves the right to amend this policy, and changes will be effective upon publication on the website.
+              </p>
+              
+              <h3>Kinds of Collected Information</h3>
+              
+              <ol>
+                <li>
+                  <strong>Personal and Demographic Information:</strong>
+                  <ul>
+                    <li>We collect personal information such as name, address, phone number, and email address when you visit the site or interact with surveys and offers.</li>
+                    <li>Demographic information, such as postal code, age group, income, and education level, is also collected voluntarily.</li>
+                    <li>The data is primarily used for internal business and marketing purposes.</li>
+                    <li>ARABMLS may share information with third parties for product and service offerings or when required by law.</li>
+                    <li>To review or correct your personal information or request its deletion, contact us in writing.</li>
+                  </ul>
+                </li>
+              
+                <li>
+                  <strong>Visitor Computer Information:</strong>
+                  <ul>
+                    <li>We use cookies to collect data about your device and access patterns to improve your experience.</li>
+                    <li>Cookies help us allocate your usage and make your visit more enjoyable.</li>
+                  </ul>
+                </li>
+              
+                <li>
+                  <strong>Employment Inquiries:</strong>
+                  <ul>
+                    <li>Personal information submitted for employment purposes is used only for that purpose.</li>
+                  </ul>
+                </li>
+              
+                <li>
+                  <strong>Security:</strong>
+                  <ul>
+                    <li>ARABMLS takes precautions to protect your data from loss, misuse, or unauthorized access.</li>
+                    <li>Employees handling your information are required to maintain confidentiality.</li>
+                  </ul>
+                </li>
+              
+                <li>
+                  <strong>Secure Access to Photographic Identification:</strong>
+                  <ul>
+                    <li>To access secure areas of the site, ARABMLS may require government-issued ID for identity verification.</li>
+                    <li>Information from IDs is used only for secure access purposes and is not shared except as legally required.</li>
+                  </ul>
+                </li>
+              
+                <li>
+                  <strong>Children:</strong>
+                  <ul>
+                    <li>The site is not directed at children under 18 years old.</li>
+                    <li>If we receive information from a child without parental consent, we will only use it to respond directly and will not retain it.</li>
+                  </ul>
+                </li>
+              </ol>
+              
+              <h3>Contacting ARABMLS</h3>
+              <p>
+              If you have questions about this policy or the site, you can contact us via email, phone, or post.
+              </p>
+              
+              <h3>Terms of Contribution</h3>
+              <ol>
+                <li>
+                  I agree to comply with all related regulations, including:
+                  <ul>
+                    <li>Paying membership fees (non-refundable).</li>
+                    <li>Actively participating in real estate activities, such as offering real estate sale and purchase services or listing properties with ARABMLS.</li>
+                  </ul>
+                </li>
+                <li>
+                  I will continue contributing to ARABMLS activities during my membership. Failure to comply may result in suspension or termination.
+                </li>
+                <li>
+                  I accept full responsibility for any violations of ARABMLS rules caused by me or my partners.
+                </li>
+                <li>
+                  I agree to complete required training courses and pay all dues at the time of application submission.
+                </li>
+                <li>
+                  I affirm the authenticity of all submitted documents and am legally responsible for any content I post on the ARABMLS site.
+                </li>
+              </ol>
+              </pre>              
           </div>
         </div>
 
@@ -785,6 +899,8 @@ configure({
   validateOnInput: true,
   validateOnModelUpdate: true,
 });
+
+const formPopulateData = JSON.parse(localStorage.getItem('temporaryProfileData'))
 
 const i18n = useI18n();
 
@@ -981,27 +1097,65 @@ async function handleBrokerageInfo(values) {
     }
   }
 }
+
+function getMinAgeDate(age) {
+  const today = new Date(); // Get the current date
+  const year = today.getFullYear() - age; // Subtract the age from the current year
+  const month = today.getMonth(); // Keep the same month
+  const day = today.getDate(); // Keep the same day
+  return new Date(year, month, day); // Return the adjusted date
+}
 /* End of the brokerage information */
+
+const MIN_AGE = 18
+
+function isValidEgyptianID(id) {
+  // Ensure it's a 14-digit number
+  if (!/^\d{14}$/.test(id)) return false;
+
+  const century = parseInt(id[0], 10);
+  if (century !== 2 && century !== 3) return false;
+
+  // Extract birthdate
+  const year = century === 2 ? "19" + id.substring(1, 3) : "20" + id.substring(1, 3);
+  const month = parseInt(id.substring(3, 5), 10);
+  const day = parseInt(id.substring(5, 7), 10);
+
+  // Validate date
+  const birthDate = new Date(`${year}-${month}-${day}`);
+  if (isNaN(birthDate.getTime())) return false;
+
+  // Ensure the person is at least 18 years old
+  const minDate = getMinAgeDate(18); // Function from before
+  if (birthDate > minDate) return false;
+
+  return true;
+}
+
 
 /* Start of the principles broker information */
 const principlesInitialValues = ref({});
 const principlesBrokerSchema = yup.object().shape({
-  fName: yup.string().required(i18n.t("ERRORS.fNameRequired")),
-  middleName: yup.string().required(i18n.t("ERRORS.middleNameRequired")),
-  lName: yup.string().required(i18n.t("ERRORS.lNameRequired")),
-  birthDate: yup.string().required(i18n.t("ERRORS.birthDateRequired")),
+  // fName: yup.string().required(i18n.t("ERRORS.fNameRequired")),
+  // middleName: yup.string().required(i18n.t("ERRORS.middleNameRequired")),
+  // lName: yup.string().required(i18n.t("ERRORS.lNameRequired")),
+  birthDate: yup
+    .date()
+    .required(i18n.t("ERRORS.birthDateRequired"))
+    .max(
+      getMinAgeDate(MIN_AGE),
+      i18n.t("ERRORS.birthDateMinAge", { age: MIN_AGE })
+    ),
   nationality: yup.string().required(i18n.t("ERRORS.nationalityRequired")),
   gender: yup.string().required(i18n.t("ERRORS.genderRequired")),
   nationalId: yup
     .string()
-    .required(i18n.t("ERRORS.governmentNationalIdRequired"))
-    .test("nationalId", i18n.t("ERRORS.nationalIdMustBe14Numbers"), (value) => {
-      if (value) {
-        return value.length === 14 ? true : false;
-      } else {
-        return false;
-      }
-    }),
+    .required(i18n.t("ERRORS.nationalIDRequired"))
+    .test(
+      "is-valid-id",
+      i18n.t("ERRORS.invalidNationalID"),
+      (value) => isValidEgyptianID(value),
+  ),
   direct_phone_number: yup.object().shape({
     phone_number: yup
       .string()
@@ -1021,12 +1175,12 @@ const principlesBrokerSchema = yup.object().shape({
         },
       ),
   }),
-  second_email: yup
-    .string()
-    .required(i18n.t("ERRORS.emailRequired"))
-    .email(i18n.t("ERRORS.invalidEmail")),
-  ifNotWhere: yup.string().notRequired(),
-  license: yup.string().notRequired(),
+  // second_email: yup
+  //   .string()
+  //   .required(i18n.t("ERRORS.emailRequired"))
+  //   .email(i18n.t("ERRORS.invalidEmail")),
+  // ifNotWhere: yup.string().notRequired(),
+  // license: yup.string().notRequired(),
 });
 
 const communicationWay = ref("email");
@@ -1176,9 +1330,9 @@ async function handleSignature(values) {
   );
 
   // =================================================================
-  frmData.append("first_name", allValues.value.fName);
-  frmData.append("middle_name", allValues.value.middleName);
-  frmData.append("last_name", allValues.value.lName);
+  frmData.append("first_name", formPopulateData.name.split(' ')[0]);
+  // frmData.append("middle_name", allValues.value.middleName);
+  frmData.append("last_name", formPopulateData.name.split(' ').length > 1 ? formPopulateData.name.split(' ')[1] : '')
   frmData.append(
     "date_of_birth",
     reformatDate(new Date(allValues.value.birthDate).toLocaleDateString()),
@@ -1194,12 +1348,11 @@ async function handleSignature(values) {
     "direct_phone_number",
     allValues.value.direct_phone_number.phone_number,
   );
-  frmData.append("broker_email", allValues.value.second_email);
+  frmData.append("broker_email", formPopulateData.email);
   frmData.append("way_of_communication", allValues.value.communicationWay);
   frmData.append("real_estate_specialty", allValues.value.realEstate);
   frmData.append(
-    "is_office_principal",
-    allValues.value.officeAddress == "yes" ? 1 : 0,
+    "is_office_principal",1
   );
   frmData.append("principal_place_of_business", allValues.value.ifNotWhere);
   if (

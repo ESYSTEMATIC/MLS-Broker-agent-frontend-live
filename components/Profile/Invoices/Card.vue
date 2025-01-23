@@ -346,7 +346,7 @@
         </div>
       </div>
 
-      <p class="flex items-center gap-2 text-xl font-bold text-[#008000]">
+      <p class="flex items-center gap-2 text-base font-bold text-[#008000]">
         <GlobalsSkeleton v-if="loading" class="h-[21px] w-[75px]" />
         <template v-else>
           {{ +card.unit_price * +card.quantity }}

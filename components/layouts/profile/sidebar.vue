@@ -1,7 +1,7 @@
 <template>
   <div class="relative h-full select-none">
     <div
-      class="mb-6 flex h-[80px] items-center justify-center"
+      class="mb-6 flex h-[80px] items-center"
       :class="!isMediumAndHovered ? '' : ''"
     >
       <NuxtLink
@@ -9,23 +9,22 @@
         class="block"
         :to="localePath('/profile')"
       >
-      <GlobalsFullLightLogo></GlobalsFullLightLogo>
-<!-- 
-        <img
+      <!-- <GlobalsFullLightLogo></GlobalsFullLightLogo> -->
+
+        <!-- <img
           v-show="$colorMode.value === 'light'"
           src="/public/logo/egypt-mls-light.svg"
           alt="logo"
           class="h-[60px] w-full object-contain"
           draggable="false"
-        />
+        /> -->
 
         <img
-          v-show="$colorMode.value === 'dark'"
           src="/public/logo/egypt-mls-dark.svg"
           alt="logo"
-          class="h-[60px] w-full object-contain"
+          class="h-[60px] ml-5 w-[200px] object-cover"
           draggable="false"
-        /> -->
+        />
       </NuxtLink>
 
       <NuxtLink
@@ -33,14 +32,12 @@
         class="mb-6 mt-5 flex items-center justify-center"
         :to="localePath('/profile')"
       >
-        <img
-          v-show="$colorMode.value === 'light'"
+        <!-- <img
           src="/profile/egy_sm_logo_light.svg"
           alt="logo-lms"
           draggable="false"
-        />
+        /> -->
         <img
-          v-show="$colorMode.value === 'dark'"
           src="/profile/egy_sm_logo_dark.svg"
           alt="logo-lms"
           draggable="false"
@@ -59,7 +56,7 @@
           :to="link.to ? localePath(link.to) : ''"
           class="flex h-[45px] w-full items-center py-3 rounded-lg px-2 text-base font-medium"
         >
-          <img
+          <!-- <img
             v-show="
               ($route.path.endsWith('/')
                 ? $route.path.slice(0, -1)
@@ -80,8 +77,8 @@
             :alt="link.name"
             class="me-2 h-[20px] w-[20px]"
             draggable="false"
-          />
-          <span v-if="!isMediumAndHovered" class="truncate font-medium">
+          /> -->
+          <span v-if="!isMediumAndHovered" class="px-2 truncate font-medium">
             {{ link.name }}
           </span>
         </NuxtLink>
@@ -163,7 +160,7 @@
           draggable="false"
         />
 
-        <span class="font-bold text-[#F44949]" v-if="!isMediumAndHovered">
+        <span class="font-bold text-[#b4922c]" v-if="!isMediumAndHovered">
           {{ $t("TITLES.logout") }}
         </span>
       </button>
@@ -295,16 +292,16 @@ function handleLogout() {
   }
   .router-link-active {
     &.router-link-exact-active {
-      @apply bg-[#CE11270A] text-primary dark:bg-[#CE11271A];
+      @apply bg-[#b4922c1f] text-primary dark:bg-[#CE11271A];
     }
   }
   button {
     @apply text-gray-500 transition-all dark:text-gray-300;
     &:hover {
-      @apply bg-[#CE11270A] dark:bg-[#CE11271A];
+      @apply bg-[#b4922c1f] dark:bg-[#CE11271A];
     }
     &.active-btn {
-      @apply bg-[#CE11270A] text-primary dark:bg-[#CE11271A];
+      @apply bg-[#b4922c1f] text-primary dark:bg-[#CE11271A];
     }
   }
 }
