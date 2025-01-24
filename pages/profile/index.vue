@@ -198,10 +198,10 @@ const items = ref([
     cards: [
       {
         id: "634",
-        image: "https://arabmls.org/wp-content/uploads/2023/11/1618f50b3a6df61a6e7eacbadcd014a7.png",
-        title: "Arab MLS",
-        description: "arabmls.org",
-        to: "https://arabmls.org/",
+        image: "https://www.egymls.com/wp-content/uploads/2024/05/EgyMLS-768x426-1.webp",
+        title: "Egypt MLS",
+        description: "www.egymls.com",
+        to: "https://www.egymls.com/",
         pinned: false,
       },
       {

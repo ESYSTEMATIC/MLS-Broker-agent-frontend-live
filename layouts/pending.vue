@@ -5,7 +5,7 @@
   >
     <div class="h-[100px] flex items-center ms-10">
       <!-- <GlobalsFullLightLogo /> -->
-      <img
+      <img 
       src="/public/logo/egypt-mls-dark.svg"
       class="h-[70px]"
       alt="light-logo"
