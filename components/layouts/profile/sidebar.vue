@@ -160,7 +160,7 @@
           draggable="false"
         />
 
-        <span class="font-bold text-[#b4922c]" v-if="!isMediumAndHovered">
+        <span class="font-bold text-[#ca0f26]" v-if="!isMediumAndHovered">
           {{ $t("TITLES.logout") }}
         </span>
       </button>
@@ -292,16 +292,16 @@ function handleLogout() {
   }
   .router-link-active {
     &.router-link-exact-active {
-      @apply bg-[#b4922c1f] text-primary dark:bg-[#CE11271A];
+      @apply bg-[#000] text-primary dark:bg-[#CE11271A];
     }
   }
   button {
     @apply text-gray-500 transition-all dark:text-gray-300;
     &:hover {
-      @apply bg-[#b4922c1f] dark:bg-[#CE11271A];
+      @apply bg-[#000] dark:bg-[#CE11271A];
     }
     &.active-btn {
-      @apply bg-[#b4922c1f] text-primary dark:bg-[#CE11271A];
+      @apply bg-[#000] text-primary dark:bg-[#CE11271A];
     }
   }
 }

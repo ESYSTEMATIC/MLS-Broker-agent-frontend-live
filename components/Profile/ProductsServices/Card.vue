@@ -4,7 +4,7 @@
   >
     <button
       @click="$emit('makePinUnPin', card.id)"
-      class="pin-btn group absolute end-1 top-1 flex size-11 items-center justify-center rounded-full bg-[#b4922c1f] transition-all hover:bg-primary dark:bg-[#b4922c1f] hover:dark:bg-primary"
+      class="pin-btn group absolute end-1 top-1 flex size-11 items-center justify-center rounded-full bg-[#000] transition-all hover:bg-primary dark:bg-[#000] hover:dark:bg-primary"
       type="button"
     >
       <img
@@ -54,7 +54,7 @@
         <NuxtLink
           :to="card.to"
           target="_blank"
-          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#b4922c1f] transition-all hover:bg-primary dark:bg-[#FFF4F4] hover:dark:bg-primary"
+          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#000] transition-all hover:bg-primary dark:bg-[#ca0f26] hover:dark:bg-primary"
         >
           <font-awesome-icon
             :icon="`fas fa-arrow-${locale === 'ar' ? 'left' : 'right'}`"

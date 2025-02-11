@@ -121,7 +121,7 @@ const items = ref([
     cards: [
       {
         id: "6443455",
-        image: "/profile/crm-matrix.svg",
+        image: "/profile/04.svg",
         title: locale.value === "ar" ? "إدارة العملاء" : "CRM",
         description:
           locale.value === "ar"
@@ -132,7 +132,7 @@ const items = ref([
       },
       {
         id: "64434551",
-        image: "/profile/merket-reports.svg",
+        image: "/profile/02.svg",
         title: locale.value === "ar" ? "تقارير السوق" : "Market Reports",
         description: locale.value === "ar" ? "اتجاهات السوق" : "Market Trends",
         to: "https://egypt.mlsmatrix.com/Matrix/MarketReports",
@@ -140,51 +140,10 @@ const items = ref([
       },
       {
         id: "64434552",
-        image: "/profile/add-edit.svg",
+        image: "/profile/03.svg",
         title: locale.value === "ar" ? "إضافة / تعديل" : "Add / Edit",
         description: locale.value === "ar" ? "مدير القائمة" : "Listing Manager",
         to: "https://egypt.mlsmatrix.com/Matrix/AddEdit",
-        pinned: false,
-      },
-    ],
-  },
-  {
-    id: 8415,
-    category:
-      locale.value === "ar"
-        ? "منصات التواصل الإجتماعي"
-        : "Egypt MLS Social Media",
-    cards: [
-      {
-        id: "634",
-        image: "/profile/facebook.svg",
-        title: locale.value === "ar" ? "فيسبوك" : "Facebook",
-        description: "Egypt MLS",
-        to: "https://www.facebook.com/EVCFL?mibextid=LQQJ4d",
-        pinned: false,
-      },
-      {
-        id: "2347",
-        image: "/profile/instagram.svg",
-        title: locale.value === "ar" ? "إنستجرام" : "Instagram",
-        description: "@egypt.mls",
-        to: "https://www.instagram.com/egypt.mls?igsh=MWFrNnFwMmx1a2R3eQ%3D%3D&utm_source=qr",
-        pinned: false,
-      },
-      {
-        id: "23448",
-        image: "/profile/twitter.svg",
-        title: locale.value === "ar" ? "تويتر" : "Twitter",
-        description: "@egyptmls",
-        to: "https://x.com/egyptmls?s=21&t=aWFY1KXraGkeYPe2zpuLUA",
-        pinned: false,
-      },
-      {
-        id: "23441",
-        image: "/profile/linkedin.svg",
-        title: locale.value === "ar" ? "لينكدإن" : "Linked in",
-        description: "Egypt MLS",
-        to: "https://www.linkedin.com/company/egypt-mls/",
         pinned: false,
       },
     ],
@@ -214,20 +173,61 @@ const items = ref([
       },
       {
         id: "23448",
-        image: "/icons/agent-fallback.png",
+        image: "/profile/05.svg",
         title: locale.value === "ar" ? "ابحث عن وكيل" : "Find An Agent",
         description: "",
         to: "https://realestate.gov.eg/Agents",
         pinned: false,
       },
-      // {
-      //   id: "23441",
-      //   image: "/profile/linkedin.svg",
-      //   title: locale.value === "ar" ? "لينكدإن" : "Linked in",
-      //   description: "Egypt MLS",
-      //   to: "https://www.linkedin.com/company/egypt-mls/",
-      //   pinned: false,
-      // },
+      {
+        id: "23441",
+        image: "/profile/arab-mls-university.png",
+        title: locale.value === "ar" ? "جامعة MLS العربية بالقاهرة" : "Arab MLS University In Cairo",
+        description: "Egypt MLS",
+        to: "#",
+        pinned: false,
+      },
+    ],
+  },
+  {
+    id: 8415,
+    category:
+      locale.value === "ar"
+        ? "منصات التواصل الإجتماعي"
+        : "Egypt MLS Social Media",
+    cards: [
+      {
+        id: "634",
+        image: "/profile/f.png",
+        title: locale.value === "ar" ? "فيسبوك" : "Facebook",
+        description: "Egypt MLS",
+        to: "https://www.facebook.com/EVCFL?mibextid=LQQJ4d",
+        pinned: false,
+      },
+      {
+        id: "2347",
+        image: "/profile/ig.png",
+        title: locale.value === "ar" ? "إنستجرام" : "Instagram",
+        description: "@egypt.mls",
+        to: "https://www.instagram.com/egypt.mls?igsh=MWFrNnFwMmx1a2R3eQ%3D%3D&utm_source=qr",
+        pinned: false,
+      },
+      {
+        id: "23448",
+        image: "/profile/01.svg",
+        title: locale.value === "ar" ? "اكس" : "ْْX",
+        description: "@egyptmls",
+        to: "https://x.com/egyptmls?s=21&t=aWFY1KXraGkeYPe2zpuLUA",
+        pinned: false,
+      },
+      {
+        id: "23441",
+        image: "/profile/in.png",
+        title: locale.value === "ar" ? "لينكدإن" : "Linked in",
+        description: "Egypt MLS",
+        to: "https://www.linkedin.com/company/egypt-mls/",
+        pinned: false,
+      },
     ],
   },
 ]);
