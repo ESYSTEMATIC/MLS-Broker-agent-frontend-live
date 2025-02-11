@@ -315,24 +315,17 @@ async function handleVerifyCode() {
 
             if (res.data) {
               if (res.data.user && res.data.user.company_id) {
-                authStore.setRegistrationData({
-                  company_id: res.data.user.company_id,
-                  register_complete_step: res.data.user.register_complete_step,
-                  branch_id: res.data.branch_id,
-                  company_email: res.data.user.email,
-                });
-
+                authStore.setRegistrationData({...res.data.user});
                 temporaryToken.value = res.data.token;
               }
             }
-
             if (
-              res.data?.application_status == "new" &&
+              !res.data.user.profile_complete &&
               res.data?.user?.application_type?.name == "broker"
             ) {
               router.push(localePath("/auth/update-application"));
             } else if (
-              res.data?.application_status == "new" &&
+              !res.data.user.profile_complete &&
               res.data?.user?.application_type?.name == "developer"
             ) {
               router.push(localePath("/auth/application-developer"));

@@ -883,6 +883,7 @@
       </div>
       <!-- End of the signature -->
     </template>
+    <!-- {{authStore.profileData.broker.branch_id}} -->
   </div>
 </template>
 
@@ -1324,9 +1325,9 @@ async function handleSignature(values) {
 
   frmData.append(
     "branch_id",
-    authStore.registrationData.branch_id
-      ? authStore.registrationData.branch_id
-      : allValues.value.branch,
+    authStore.profileData.broker.branch_id
+      ? authStore.profileData.broker.branch_id
+      : allValues.value.branch_id,
   );
 
   // =================================================================
@@ -1384,7 +1385,24 @@ async function handleSignature(values) {
   // frmData.append("tax_id_b", allValues.value.taxBackId);
 
   signatureLoading.value = true;
-
+  
+  if(authStore.registrationData.app_paid){
+    await $fetch("/account/application/updateNew", {
+    method: "POST",
+    baseURL,
+    headers,
+    body: frmData,
+  })
+    .then(() => {
+      router.push(localePath("/auth/status"));
+    })
+    .catch((e) => {
+      console.error(e);
+      toast.error(e.response._data.Error[0]);
+    })
+    .finally(() => (signatureLoading.value = false));
+    return
+  }
   await $fetch("/account/application/update", {
     method: "POST",
     baseURL,

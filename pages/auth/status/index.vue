@@ -60,14 +60,19 @@ import { useAuthStore } from "~/store/auth";
 const authStore = useAuthStore();
 
 const data = ref({});
+const router = useRouter();
 
 if (authStore.verificationData) {
   data.value = authStore.verificationData;
-} else if (useCookie("application_status").value) {
-  data.value = {
-    application_status: useCookie("application_status").value,
-  };
+} 
+else{
+  router.push("/auth/login");
 }
+// else if (useCookie("application_status").value) {
+//   data.value = {
+//     application_status: useCookie("application_status").value,
+//   };
+// }
 </script>
 
 <style lang="scss" scoped></style>

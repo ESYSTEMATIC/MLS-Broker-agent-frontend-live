@@ -8,14 +8,24 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const status = useCookie("status").value;
 
   if (token.value) {
-    if (
-      application_status == "approved" &&
-      status == "expired" &&
-      to.fullPath !== "/auth/status" &&
-      to.fullPath !== "/auth/registration"
-    ) {
-      return navigateTo("/auth/status");
-    } else if (
+    // if(status && application_status && !authStore.verificationData){
+    //     return navigateTo("/");
+    // }
+    // if((to.fullPath.includes("/auth/status") || (application_status == "approved" &&
+    //   status == "expired")) && !authStore.verificationData){
+    //   return navigateTo("/");
+    // }
+
+    
+    // if (
+    //   application_status == "approved" &&
+    //   status == "expired" &&
+    //   to.fullPath !== "/auth/status" &&
+    //   to.fullPath !== "/auth/registration"
+    // ) {
+    //   return navigateTo("/auth/status");
+    // }
+     if (
       application_status == "approved" &&
       status == "training" &&
       to.fullPath !== "/auth/registration"

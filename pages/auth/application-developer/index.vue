@@ -1243,6 +1243,8 @@ async function handleSignature(values) {
   }
 
   if (authStore.registrationData.company_id) {
+    console.log(authStore.registrationData.company_id , 'authStore.registrationData.company_id');
+    
     frmData.append("company_id", authStore.registrationData.company_id);
 
     const item = allCompaniesData.value.find(
@@ -1262,8 +1264,8 @@ async function handleSignature(values) {
 
   frmData.append(
     "branch_id",
-    authStore.registrationData.branch_id
-      ? authStore.registrationData.branch_id
+    authStore.profileData.developer.branch_id
+      ? authStore.profileData.developer.branch_id
       : allValues.value.branch_id,
   );
   // =================================================================
@@ -1307,6 +1309,23 @@ async function handleSignature(values) {
 
   signatureLoading.value = true;
 
+  if(authStore.registrationData.app_paid){
+    await $fetch("/account/application/updateNew", {
+    method: "POST",
+    baseURL,
+    headers,
+    body: frmData,
+  })
+    .then(() => {
+      router.push(localePath("/auth/status"));
+    })
+    .catch((e) => {
+      console.error(e);
+      toast.error(e.response._data.Error[0]);
+    })
+    .finally(() => (signatureLoading.value = false));
+    return
+  }
   await $fetch("/account/application/update", {
     method: "POST",
     baseURL,
