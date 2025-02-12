@@ -883,7 +883,7 @@
       </div>
       <!-- End of the signature -->
     </template>
-    <!-- {{authStore.profileData.broker.branch_id}} -->
+    {{allValues}}
   </div>
 </template>
 
@@ -1327,7 +1327,7 @@ async function handleSignature(values) {
     "branch_id",
     authStore.profileData.broker.branch_id
       ? authStore.profileData.broker.branch_id
-      : allValues.value.branch_id,
+      : allValues.value.branch,
   );
 
   // =================================================================
