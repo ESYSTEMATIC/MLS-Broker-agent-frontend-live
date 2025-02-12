@@ -32,7 +32,7 @@ module.exports = {
           light: "#879192",
           dark: "#9FA7A8",
         },
-        primary: "#b4922c",
+        primary: "#ca0f26",
         error: "#CE1127",
         inputBg: {
           light: "#E7E9E9",
