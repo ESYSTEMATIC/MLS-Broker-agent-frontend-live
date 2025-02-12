@@ -38,8 +38,8 @@
 
     <div class="flex w-full items-center justify-between">
       <div class="max-w-[calc(100%-40px)]">
-        <h4 class="mb-1 max-w-full truncate font-semibold" :title="card.title">
-          {{ card.title }}
+        <h4 class="mb-1 max-w-full font-semibold" :title="card.title">
+          {{ card.title.slice(0, 20) }}
         </h4>
 
         <p
