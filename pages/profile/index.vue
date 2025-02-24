@@ -156,7 +156,7 @@ const items = ref([
         : "Egypt MLS Products",
     cards: [
       {
-        id: "634",
+        id: "631",
         image: "https://www.egymls.com/wp-content/uploads/2024/05/EgyMLS-768x426-1.webp",
         title: "Egypt MLS",
         description: "www.egymls.com",
@@ -164,25 +164,25 @@ const items = ref([
         pinned: false,
       },
       {
-        id: "2347",
+        id: "2345",
         image: "/logo/egypt-platform-logo-light.svg",
-        title: locale.value === "ar" ? "منصة مصر العقارية" : "Egyptian Real Estate Platform",
+        title: locale.value === "ar" ? "منصة مصر العقارية الحكومية" : "Egyptian Real Estate Platform",
         description: "realestate.gov.eg",
-        to: "/logo/egypt-platform-logo-light.svg",
+        to: "https://realestate.gov.eg",
         pinned: false,
       },
       {
-        id: "23448",
+        id: "2349",
         image: "/profile/05.svg",
         title: locale.value === "ar" ? "ابحث عن وكيل" : "Find An Agent",
         description: "",
-        to: "https://realestate.gov.eg/Agents",
+        to: "https://realestate.gov.eg/find-agent",
         pinned: false,
       },
       {
-        id: "23441",
+        id: "2342",
         image: "/profile/arab-mls-university.png",
-        title: locale.value === "ar" ? "جامعة MLS العربية بالقاهرة" : "Arab MLS University In Cairo",
+        title: locale.value === "ar" ? "جامعة MLS العربية" : "Arab MLS University In Cairo",
         description: "Egypt MLS",
         to: "#",
         pinned: false,
@@ -190,7 +190,7 @@ const items = ref([
     ],
   },
   {
-    id: 8415,
+    id: 8416,
     category:
       locale.value === "ar"
         ? "منصات التواصل الإجتماعي"

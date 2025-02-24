@@ -321,7 +321,7 @@ async function handleUpdatePassword(values) {
       :initial-values="initialValues"
       @submit="handleUpdateProfile"
     >
-      <form class="bg-white card-shadow px-6 py-4 rounded-2xl grid grid-cols-12 gap-5">
+      <form class="bg-white card-shadow px-6 dark:bg-box-container-dark py-4 rounded-2xl grid grid-cols-12 gap-5">
         <div
           class="col-span-12 flex flex-col gap-3"
         >
@@ -508,7 +508,7 @@ async function handleUpdatePassword(values) {
           class="col-span-12 xl:col-span-6"
         />
 
-        <h5 class="col-span-12 mt-3 font-bold">
+        <!-- <h5 class="col-span-12 mt-3 font-bold">
           {{ $t("TITLES.marketingCommunicationPreferences") }}
         </h5>
 
@@ -553,7 +553,7 @@ async function handleUpdatePassword(values) {
 
             <span>{{ $t("LABELS.contactMeViaText") }}</span>
           </label>
-        </div>
+        </div> -->
 
         <!-- <div class="col-span-2 flex items-center justify-end">
           <GlobalsButton

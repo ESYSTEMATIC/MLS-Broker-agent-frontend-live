@@ -54,7 +54,7 @@
         <NuxtLink
           :to="card.to"
           target="_blank"
-          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#000] transition-all hover:bg-primary dark:bg-[#ca0f26] hover:dark:bg-primary"
+          class="btn-card flex size-11 items-center justify-center rounded-full bg-[#000] transition-all hover:bg-primary hover:dark:bg-primary"
         >
           <font-awesome-icon
             :icon="`fas fa-arrow-${locale === 'ar' ? 'left' : 'right'}`"
