@@ -107,7 +107,7 @@ async function handleRegister(values) {
       form.value = "email-confirmation";
 
       registeredEmail.value = values.email;
-      handleEmailConfirmation()
+      // handleEmailConfirmation()
     })
     .catch((e) => {
       console.error(e);

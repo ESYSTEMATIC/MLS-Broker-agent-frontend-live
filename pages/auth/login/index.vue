@@ -842,7 +842,7 @@ watch(
         </div> -->
 
         <v-otp-input
-          input-classes="rounded-md xl:text-2xl text-center size-[65px] bg-[#F8F9F9] border border-[#E7E9E9] dark:bg-[#0D0D0D] dark:border-[#262626]"
+          input-classes="rounded-md xl:text-2xl text-center size-[50px] md:size-[65px] bg-[#F8F9F9] border border-[#E7E9E9] dark:bg-[#0D0D0D] dark:border-[#262626]"
           class="my-3.5 flex items-center gap-7"
           separator=" "
           v-model="verify_code"
