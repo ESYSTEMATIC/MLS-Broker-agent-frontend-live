@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card relative z-[10] w-[250px] min-h-[200px] overflow-hidden rounded-2xl border p-4 transition-all dark:border-box-container-dark dark:bg-[#2c2c2c]"
+    class="card relative z-[10] w-[300px] md:w-[250px] min-h-[200px] overflow-hidden rounded-2xl border p-4 transition-all dark:border-box-container-dark dark:bg-[#2c2c2c]"
   >
     <button
       @click="$emit('makePinUnPin', card.id)"
