@@ -135,7 +135,7 @@ const headers = {
     (item) => item.code === i18n.locale.value,
   )?.iso,
   Lang: i18n.locale.value,
-  Authorization: `Bearer ${useCookie("mls_egypt_token").value}`,
+  Authorization: `Bearer ${localStorage.getItem("mls_egypt_token")}`,
 };
 
 const getVideos = async () => {

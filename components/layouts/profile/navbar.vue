@@ -30,9 +30,39 @@
       </transition>
     </Teleport>
 
+    <Teleport to="body">
+      <GlobalsConfirmModal
+        v-if="logoutModal"
+        :title="$t('TITLES.logout')"
+        :text="$t('TEXTS.logoutText')"
+        :btnText="$t('BUTTONS.logout')"
+        :loading="logoutLoading"
+        @handleClick="handleLogout"
+        @close="logoutModal = false"
+      />
+    </Teleport>
+
     <div
       class="mb-10 hidden flex-wrap items-center justify-between gap-5 md:flex"
     >
+    <div class="px-4 py-2">
+      <button
+        @click="logoutModal = true"
+        type="button"
+        class="flex h-[40px] w-full items-center justify-center rounded-lg px-2 text-sm font-medium"
+      >
+        <img
+          src="/profile/icons/sidebar/logout.svg"
+          alt="logout"
+          class="me-2 size-[20px] rtl:rotate-180"
+          draggable="false"
+        />
+
+        <span class="font-bold text-[#ca0f26]" v-if="!isMediumAndHovered">
+          {{ $t("TITLES.logout") }}
+        </span>
+      </button>
+    </div>
       <div class="flex flex-grow items-center gap-2">
         <!-- <div class="input-wrapper-db min-w-[100px] max-w-[450px]">
           <label for="search">
@@ -179,12 +209,20 @@ const i18n = useI18n();
 
 const showNotificationsModal = ref(false);
 
+const logoutModal = ref(false);
 const changeLanguage = ref(false);
+const logoutLoading = ref(false);
 
 const localePath = useLocalePath();
 
 const authStore = useAuthStore();
 const { profileData } = storeToRefs(authStore);
+
+function handleLogout() {
+  logoutLoading.value = true;
+
+  location.href = "http://www.egymls.com";
+}
 </script>
 
 <style lang="scss" scoped>

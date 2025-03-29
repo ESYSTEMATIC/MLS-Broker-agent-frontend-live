@@ -24,7 +24,6 @@ definePageMeta({
 const toast = useToast();
 
 const localePath = useLocalePath();
-
 const form = ref("register");
 
 const {
@@ -87,17 +86,18 @@ const registerLoading = ref(false);
 async function handleRegister(values) {
   registerLoading.value = true;
 
-  await $fetch("/account/register", {
+  await $fetch("/register", {
     baseURL,
     method: "POST",
     headers,
     body: {
-      name: values.name,
+      full_name: values.name,
       email: values.email,
       country_code_phone: "+20",
-      phone: values.phone.replace(/^[0.]+/, ""),
+      phone: values.phone,
       second_phone: values.phone.replace(/^[0.]+/, ""),
       password: values.password,
+      password_confirmation: values.password,
       type: values.role,
     },
   })
@@ -107,12 +107,12 @@ async function handleRegister(values) {
       form.value = "email-confirmation";
 
       registeredEmail.value = values.email;
-      // handleEmailConfirmation()
+      // resendEmailConfirmation()
     })
     .catch((e) => {
       console.error(e);
 
-      toast.error(e.response._data.Error[0]);
+      toast.error(Object.values(e.response._data.errors)[0], {timeout : 5000});
     })
     .finally(() => (registerLoading.value = false));
 }
@@ -120,7 +120,7 @@ async function handleRegister(values) {
 
 /* Start of the email confirmation */
 const emailConfirmationLoading = ref(false);
-async function handleEmailConfirmation() {
+async function resendEmailConfirmation() {
   emailConfirmationLoading.value = true;
 
   await $fetch("/account/sendVerificationCode", {
@@ -361,7 +361,7 @@ const changeLanguage = ref(false);
             type="button"
             class="font-medium text-primary disabled:cursor-not-allowed disabled:opacity-60"
             :disabled="emailConfirmationLoading"
-            @click="handleEmailConfirmation"
+            @click="resendEmailConfirmation"
           >
             {{ $t("BUTTONS.resendConfirmationEmail") }}
           </button>

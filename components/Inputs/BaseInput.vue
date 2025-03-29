@@ -128,8 +128,8 @@ function checkIsNumber(e) {
             <font-awesome-icon
               :icon="`fa-solid ${inputType === 'password' ? 'fa-eye' : 'fa-eye-slash'}`"
               :class="meta.touched && !meta.valid ? '!text-error' : 'text-text'"
-            />
-          </ClientOnly>
+              />
+            </ClientOnly>
         </button>
       </ClientOnly>
     </div>

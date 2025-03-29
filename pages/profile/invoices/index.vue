@@ -58,8 +58,9 @@
           {{ $t("TEXTS.noInvoices") }}
         </p>
       </div>
-  
+      
       <div v-if="showType == 'row'">
+        {{ data }}
         <ProfileInvoicesTable v-if="pending" loading :items="[]" />
   
         <ProfileInvoicesTable v-else :items="data" />
@@ -111,7 +112,7 @@ const dataFilter = [
 const showType = ref("grid");
 
 /* Start of the function that fetch data */
-const token = useCookie("mls_egypt_token");
+const token = localStorage.getItem("mls_egypt_token");
 
 const headers = {
   "Accept-Language": locales.value.find((item) => item.code === locale.value)

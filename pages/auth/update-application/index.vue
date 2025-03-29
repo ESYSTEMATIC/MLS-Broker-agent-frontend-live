@@ -14,7 +14,7 @@
   </Teleport>
 
   <div
-    class="relative max-h-[95vh] w-full overflow-y-auto overflow-x-hidden rounded-[24px] border border-transparent bg-white p-3 dark:border-[#1C1C21] dark:bg-[#0B0909] md:p-7 lg:w-[1200px]"
+    class="relative max-h-[95vh] min-h-[60vh] w-full overflow-y-auto overflow-x-hidden rounded-[24px] border border-transparent bg-white p-3 dark:border-[#1C1C21] dark:bg-[#0B0909] md:p-7 lg:w-[1200px]"
   >
     <div class="mb-5 grid w-full grid-cols-12 items-center font-medium xl:mb-7">
       <button
@@ -224,7 +224,7 @@
             />
           </div>
 
-          <div class="col-span-12 md:col-span-6 xl:col-span-4">
+          <div class="col-span-12 lg:mt-4 md:col-span-6 xl:col-span-4">
             <InputsBaseInput
               id="nationalId"
               name="nationalId"
@@ -243,7 +243,7 @@
             :placeholder="$t('INPUTS.phoneNumberPlaceholder')"
           />
         </div> -->
-          <div class="col-span-12 md:col-span- xl:col-span-8">
+          <!-- <div class="col-span-12 md:col-span- xl:col-span-8">
             <InputsBasePhoneInput
               name="direct_phone_number"
               :label="$t('LABELS.phoneNumber')"
@@ -251,7 +251,7 @@
               :value="initialValues.direct_phone_number"
               isNumber
             />
-          </div>
+          </div> -->
 <!-- 
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <InputsBaseInput
@@ -262,7 +262,7 @@
             />
           </div> -->
 
-          <div class="col-span-12 md:col-span-6">
+          <div class="col-span-12 md:col-span-6 lg:mt-7">
             <label
               for="preferredWayCommunication"
               class="mb-2 block font-medium"
@@ -302,7 +302,7 @@
             </div>
           </div>
 
-          <div class="col-span-12 md:col-span-6">
+          <!-- <div class="col-span-12 md:col-span-6">
             <label for="realEstateSpecialty" class="mb-2 block font-medium">{{
               $t("LABELS.realEstateSpecialty")
             }}</label>
@@ -353,7 +353,7 @@
                 <span>{{ $t("INPUTS.both") }}</span>
               </label>
             </div>
-          </div>
+          </div> -->
 
           <!-- <div class="col-span-12 md:col-span-7">
             <label for="ensureOfficeAddress" class="mb-2 block font-medium">{{
@@ -402,7 +402,7 @@
             />
           </div> -->
 
-          <div class="col-span-12 md:col-span-6">
+          <!-- <div class="col-span-12 md:col-span-6">
             <InputsBaseInput
               id="license"
               name="license"
@@ -410,7 +410,7 @@
               :label="$t('LABELS.realEstateLicense')"
               :placeholder="$t('INPUTS.realEstateLicensePlaceholder')"
             />
-          </div>
+          </div> -->
 
           <div
             class="col-span-12 flex items-center gap-3 font-medium text-white"
@@ -419,7 +419,7 @@
             "
           >
             <GlobalsButton
-              v-if="checkRegisterStep !== 2"
+              v-if="!authStore.registrationData.branch_id"
               type="button"
               :text="$t('BUTTONS.back')"
               class="w-fit border border-[#CE11271A] bg-[#141313] px-5 duration-300 hover:bg-primary"
@@ -808,7 +808,7 @@
               </div>
             </VeeField>
 
-            <div class="mb-5 flex justify-end">
+            <!-- <div class="mb-5 flex justify-end">
               <div class="flex items-center gap-2">
                 <span class="font-bold text-title-light dark:text-white">
                   {{ $t("LABELS.applicationFees") }}:
@@ -818,10 +818,11 @@
                   >{{ applicationFees }} {{ $t("TITLES.AED") }}</span
                 >
               </div>
-            </div>
+            </div> -->
 
             <div class="mb-5">
               <div class="flex items-center justify-between gap-3">
+                <!-- {{ authStore.profileData }} -->
                 <label for="signature" class="mb-2 block font-medium">
                   {{ $t("TITLES.signature") }}
                 </label>
@@ -901,7 +902,7 @@ configure({
   validateOnModelUpdate: true,
 });
 
-const formPopulateData = JSON.parse(localStorage.getItem('temporaryProfileData'))
+const formPopulateData = localStorage.getItem('temporaryProfileData') ? JSON.parse(localStorage.getItem('temporaryProfileData')) : {}
 
 const i18n = useI18n();
 
@@ -1003,7 +1004,6 @@ const resetBranch = ref(false);
 
 function getCompanyBranches(id) {
   const company = allCompanies.value.find((company) => company.id === id);
-
   if (company) {
     branchesOptions.value = company.branches;
   }
@@ -1019,7 +1019,7 @@ async function getAllCompanies() {
     baseURL,
     headers,
     params: {
-      company_name: "brokerage_company",
+      company_type: authStore.registrationData.type,
     },
   })
     .then((res) => {
@@ -1157,25 +1157,25 @@ const principlesBrokerSchema = yup.object().shape({
       i18n.t("ERRORS.invalidNationalID"),
       (value) => isValidEgyptianID(value),
   ),
-  direct_phone_number: yup.object().shape({
-    phone_number: yup
-      .string()
-      .required(i18n.t("ERRORS.phoneNumberRequired"))
-      .test(
-        "phone-number-length",
-        i18n.t("ERRORS.phoneNumberLength"),
-        function (value) {
-          const { phone_limit } = this.parent;
-          const phoneLimitNumber = Number(phone_limit);
-          const errorMessage = i18n.t("ERRORS.phoneNumberLength", {
-            number: phoneLimitNumber,
-          });
-          return value && value.length === phoneLimitNumber
-            ? true
-            : this.createError({ message: errorMessage });
-        },
-      ),
-  }),
+  // direct_phone_number: yup.object().shape({
+  //   phone_number: yup
+  //     .string()
+  //     .required(i18n.t("ERRORS.phoneNumberRequired"))
+  //     .test(
+  //       "phone-number-length",
+  //       i18n.t("ERRORS.phoneNumberLength"),
+  //       function (value) {
+  //         const { phone_limit } = this.parent;
+  //         const phoneLimitNumber = Number(phone_limit);
+  //         const errorMessage = i18n.t("ERRORS.phoneNumberLength", {
+  //           number: phoneLimitNumber,
+  //         });
+  //         return value && value.length === phoneLimitNumber
+  //           ? true
+  //           : this.createError({ message: errorMessage });
+  //       },
+  //     ),
+  // }),
   // second_email: yup
   //   .string()
   //   .required(i18n.t("ERRORS.emailRequired"))
@@ -1268,6 +1268,18 @@ const signatureSchema = yup.object().shape({
     .notRequired(),
 });
 
+function base64ToFile(base64, fileName, mimeType = 'image/png') {
+    const byteCharacters = atob(base64.split(',')[1]); // Decode Base64
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    return new File([byteArray], fileName, { type: mimeType });
+}
+
 const signatureLoading = ref(false);
 async function handleSignature(values) {
   allValues.value = {
@@ -1276,155 +1288,58 @@ async function handleSignature(values) {
     signatureAsImg: signatureAsImg.value.save("image/jpeg"),
   };
 
+
   const frmData = new FormData();
 
-  function setCompanyData(item) {
-    frmData.append("brokerage_address", item.company.address);
-    frmData.append("name", item.company.name);
-    frmData.append("email", item.company.email);
-    frmData.append("country_code_brokerage_phone_number", "20");
-    if (item.phone) {
-      frmData.append("brokerage_phone_number", item.phone);
-    }
-    if (item.company.fax_code_number) {
-      frmData.append(
-        "country_code_brokerage_fax_number",
-        item.company.fax_code_number,
-      );
-    }
-    if (item.company.fax_number) {
-      frmData.append("brokerage_fax_number", item.company.fax_number);
-    }
-    frmData.append("website", item.company.website);
-    frmData.append("brokerage_tax_id", item.company.tax_id);
-    if (item.company.commercial_registration) {
-      frmData.append(
-        "brokerage_commercial_registration",
-        item.company.commercial_registration,
-      );
-    }
-  }
-
-  if (authStore.registrationData.company_id) {
-    frmData.append("company_id", authStore.registrationData.company_id);
-
-    const item = allCompaniesData.value.find(
-      (company) => company.company.id == authStore.registrationData.company_id,
-    );
-
-    setCompanyData(item);
-  } else {
-    const item = allCompaniesData.value.find(
-      (company) => company.company.name === allValues.value.company,
-    );
-
-    frmData.append("company_id", item.id);
-
-    setCompanyData(item);
-  }
-
+  console.log(authStore.profileData);
+  
   frmData.append(
     "branch_id",
-    authStore.profileData.broker.branch_id
-      ? authStore.profileData.broker.branch_id
-      : allValues.value.branch,
+    authStore.registrationData.branch_id ? authStore.registrationData.branch_id : allValues.value.branch,
   );
 
   // =================================================================
-  frmData.append("first_name", formPopulateData.name.split(' ')[0]);
+  // frmData.append("first_name", formPopulateData.name.split(' ')[0]);
   // frmData.append("middle_name", allValues.value.middleName);
-  frmData.append("last_name", formPopulateData.name.split(' ').length > 1 ? formPopulateData.name.split(' ')[1] : '')
+  // frmData.append("last_name", formPopulateData.name.split(' ').length > 1 ? formPopulateData.name.split(' ')[1] : '')
   frmData.append(
-    "date_of_birth",
+    "birth_day",
     reformatDate(new Date(allValues.value.birthDate).toLocaleDateString()),
   );
   frmData.append("nationality", allValues.value.nationality);
   frmData.append("gender", allValues.value.gender);
-  frmData.append("government_national_id", allValues.value.nationalId);
-  frmData.append(
-    "country_code_direct_phone_number",
-    allValues.value.direct_phone_number.phone_code,
-  );
-  frmData.append(
-    "direct_phone_number",
-    allValues.value.direct_phone_number.phone_number,
-  );
-  frmData.append("broker_email", formPopulateData.email);
+  frmData.append("national_id", allValues.value.nationalId);
   frmData.append("way_of_communication", allValues.value.communicationWay);
-  frmData.append("real_estate_specialty", allValues.value.realEstate);
   frmData.append(
     "is_office_principal",1
   );
-  frmData.append("principal_place_of_business", allValues.value.ifNotWhere);
-  if (
-    allValues.value.ifNotWhere &&
-    allValues.value.license !== "undefined" &&
-    allValues.value.license
-  ) {
-    frmData.append("real_estate_license", allValues.value.license);
-  }
+  // frmData.append("principal_place_of_business", allValues.value.ifNotWhere);
   // =================================================================
   frmData.append(
     "signature_date",
     reformatDate(new Date().toLocaleDateString()),
   );
-  frmData.append("signature_full_name", allValues.value.signature);
-  frmData.append("digital_signature", allValues.value.signatureAsImg);
+  frmData.append("signature", allValues.value.signature);
+  frmData.append("signature_digital", allValues.value.signatureAsImg);
   // =================================================================
-  frmData.append("national_id_f", allValues.value.nationalFrontId);
-  frmData.append("national_id_b", allValues.value.nationalBackId);
-  // frmData.append(
-  //   "commercial_registration_f",
-  //   allValues.value.commercialRegistrationFrontId,
-  // );
-  // frmData.append(
-  //   "commercial_registration_b",
-  //   allValues.value.commercialRegistrationBackId,
-  // );
-  // frmData.append("tax_id_f", allValues.value.taxFrontId);
-  // frmData.append("tax_id_b", allValues.value.taxBackId);
+  frmData.append("national_id_front", allValues.value.nationalFrontId);
+  frmData.append("national_id_back", allValues.value.nationalBackId);
 
   signatureLoading.value = true;
   
-  if(authStore.registrationData.app_paid){
-    await $fetch("/account/application/updateNew", {
-    method: "POST",
-    baseURL,
-    headers,
-    body: frmData,
-  })
-    .then(() => {
-      router.push(localePath("/auth/status"));
-    })
-    .catch((e) => {
-      console.error(e);
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (signatureLoading.value = false));
-    return
-  }
   await $fetch("/account/application/update", {
     method: "POST",
     baseURL,
     headers,
     body: frmData,
   })
-    .then(() => {
-      if (
-        paymentData.value &&
-        paymentData.value.enable_payment_for_application === 1
-      ) {
-        toast.success(i18n.t("TEXTS.waitingForPayment"));
-
-        paymentModal.value = true;
-      } else {
-        SubmitApplicationFees();
-      }
+    .then((res) => {
+      currentPaymentTransaction.value = res.data
+      startPayment()
     })
     .catch((e) => {
       console.error(e);
-
-      toast.error(e.response._data.Error[0]);
+      toast.error(Object.values(e.response._data.errors)[0]);
     })
     .finally(() => (signatureLoading.value = false));
 }
@@ -1533,25 +1448,12 @@ const applicationFees = ref(null);
 watch(
   () => step.value,
   () => {
-    if (step.value == 3) {
-      getApplicationFees();
-    }
+    // if (step.value == 3) {
+      // getApplicationFees();
+    // }
   },
   { deep: true },
 );
-async function getApplicationFees() {
-  await $fetch("/payment/applicationFees", {
-    method: "GET",
-    baseURL,
-    headers,
-  })
-    .then((res) => {
-      applicationFees.value = res.data.application_fees;
-    })
-    .catch((e) => {
-      console.error(e);
-    });
-}
 
 const currentPaymentTransaction = ref(null);
 
@@ -1559,7 +1461,7 @@ watch(
   () => step.value,
   () => {
     if (step.value == 4 && profileData?.user?.broker?.brokerage_phone_number) {
-      SubmitApplicationFees();
+      // SubmitApplicationFees();
     }
   },
   { deep: true },
@@ -1572,7 +1474,6 @@ async function SubmitApplicationFees() {
   })
     .then((res) => {
       currentPaymentTransaction.value = res.data.payment_transaction;
-
       startPayment();
     })
     .catch((e) => {
@@ -1591,30 +1492,12 @@ function startPayment() {
 }
 
 async function onPaymentSuccess() {
-  $fetch("/payment/paymentComplete", {
-    baseURL,
-    headers,
-    body: {
-      id: currentPaymentTransaction.value.id,
-      order: {
-        status: "Success",
-        merchantReferenceId: currentPaymentTransaction.value.success_indicator,
-      },
-    },
-    method: "POST",
-  })
-    .then((res) => {
-      authStore.setProfile(res.data.user);
-      authStore.setVerificationData(res.data);
-
-      router.push(localePath("/auth/status"));
+    authStore.setPendingProfile({
+      app_paid : true,
+      approved : false
     })
-    .catch((e) => {
-      console.error(e);
-
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (currentPaymentTransaction.value = null));
+    toast.success(i18n.t("TEXTS.paymentSuccess"))
+    router.push(localePath("/auth/pending"));
 }
 
 async function onPaymentError() {
@@ -1626,7 +1509,7 @@ async function onPaymentError() {
     },
     method: "POST",
   })
-    .then(() => toast.success(i18n.t("TEXTS.paymentFailed")))
+    .then(() => toast.error(i18n.t("TEXTS.paymentFailed")))
     .catch((e) => {
       console.error(e);
 
@@ -1654,6 +1537,9 @@ async function onPaymentCancel() {
 }
 
 onMounted(() => {
+  if(authStore.registrationData && authStore.registrationData.branch_id){
+    step.value = 2
+  }
   if (profileData?.user?.broker?.brokerage_phone_number) {
     loadingAllData.value = false;
 

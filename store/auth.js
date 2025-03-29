@@ -5,6 +5,7 @@ export const useAuthStore = defineStore("auth", {
     profileData: {},
     verificationData: null,
     registrationData: {},
+    pendingProfile: null,
   }),
 
   getters: {},
@@ -18,6 +19,9 @@ export const useAuthStore = defineStore("auth", {
     },
     setRegistrationData(payload) {
       this.registrationData = payload;
+    },
+    setPendingProfile(payload) {
+      this.pendingProfile = payload;
     },
   },
 });

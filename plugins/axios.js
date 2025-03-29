@@ -12,7 +12,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           (item) => item.code === nuxtApp.$i18n.locale.value,
         )?.iso,
         Lang: nuxtApp.$i18n.locale.value,
-        Authorization: `Bearer ${useCookie("mls_egypt_token").value}`,
+        Authorization: `Bearer ${localStorage.getItem("mls_egypt_token")}`,
       },
     },
     params: {},
@@ -23,14 +23,14 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   function handleError(error) {
     if (error.response && error.response.status === 401) {
-      useCookie("mls_egypt_token").value = null;
+      localStorage.removeItem("mls_egypt_token");
       router.push(localePath("/"));
     }
   }
 
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = useCookie("mls_egypt_token").value;
+      const token = localStorage.getItem("mls_egypt_token");
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class=" bg-[url('/bgPending.png')] bg-no-repeat"
+    class=" bg-[url('/bgPending.png')] bg-no-repeat min-h-screen"
     :class="locale == 'en' ? 'bg-right-bottom' : 'bg-left-bottom'"
   >
     <div class="h-[100px] flex items-center ms-10">

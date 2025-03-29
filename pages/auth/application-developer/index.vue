@@ -1051,7 +1051,7 @@ async function getAllCompanies() {
     baseURL,
     headers,
     params: {
-      company_name: "developer_company",
+      company_name: "developer",
     },
   })
     .then((res) => {
@@ -1275,7 +1275,6 @@ async function handleSignature(values) {
   frmData.append("direct_phone_number", allValues.value.direct_phone_number);
   frmData.append("developer_email", allValues.value.developer_email);
   frmData.append("title", allValues.value.title);
-
   frmData.append("units_finished", allValues.value.units_finished);
   frmData.append(
     "units_under_construction",
@@ -1309,23 +1308,6 @@ async function handleSignature(values) {
 
   signatureLoading.value = true;
 
-  if(authStore.registrationData.app_paid){
-    await $fetch("/account/application/updateNew", {
-    method: "POST",
-    baseURL,
-    headers,
-    body: frmData,
-  })
-    .then(() => {
-      router.push(localePath("/auth/status"));
-    })
-    .catch((e) => {
-      console.error(e);
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (signatureLoading.value = false));
-    return
-  }
   await $fetch("/account/application/update", {
     method: "POST",
     baseURL,

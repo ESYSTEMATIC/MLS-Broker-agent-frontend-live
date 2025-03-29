@@ -32,11 +32,19 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // baseURL: "https://mls-agent.products.aait-d.com/api",
-      baseURL: "https://api.egymls.com/api",
+      // baseURL: "https://api.egymls.com/api",
+      // baseURL: "https://backend.realestate.gov.eg/api/v1/agent-platform",
+      baseURL: "https://mls-backend.addictaco.website/api/v1/agent-platform",
+      gtm: {
+        id: 'GTM-P3SKLNGR', // Replace with your actual GTM ID
+        pageTracking: true, // Enables automatic page view tracking
+        noscript: true // Adds the <noscript> GTM iframe in <body>
+      }
     },
   },
 
   modules: [
+    // "@nuxtjs/gtm",
     [
       "@nuxtjs/i18n",
       {

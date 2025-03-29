@@ -253,7 +253,7 @@ const headers = {
     (item) => item.code === i18n.locale.value,
   )?.iso,
   Lang: i18n.locale.value,
-  Authorization: `Bearer ${useCookie("mls_egypt_token").value}`,
+  Authorization: `Bearer ${localStorage.getItem("mls_egypt_token")}`,
 };
 
 const router = useRouter();
@@ -280,7 +280,7 @@ const { data } = await useAsyncData("registration_profile_data", () =>
   }),
 );
 /* End of the function that get the profile data */
-const token = useCookie("mls_egypt_token");
+const token = localStorage.getItem("mls_egypt_token");
 const statusCookie = useCookie("status");
 
 if (data.value) {

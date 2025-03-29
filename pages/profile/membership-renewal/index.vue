@@ -102,7 +102,7 @@ const { profileData } = storeToRefs(authStore);
 /* End of the profile data */
 
 /* Start of the function that fetch data */
-const token = useCookie("mls_egypt_token");
+const token = localStorage.getItem("mls_egypt_token");
 
 const headers = {
   "Accept-Language": locales.value.find((item) => item.code === locale.value)

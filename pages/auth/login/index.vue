@@ -101,7 +101,7 @@ async function handleLogin(values) {
 
       loggedIn.value = true;
 
-      userPhone.value = res.data.phone;
+      userPhone.value = res.data.user.phone;
 
       forgotEmailOrPhone.value = values.email;
 
@@ -109,12 +109,13 @@ async function handleLogin(values) {
     })
     .catch((e) => {
       console.error(e);
-      if(e.response._data.Error[0].includes('Account Email unverified')){
-        toast.error('Please verify your account! An email has been sent to you!');
+      console.log(e.response);
+      if(e.response._data.message.includes('Account Not Verified')){
+        toast.error('Please verify your account! An email has been sent to you!' , {timeout : 3000});
         handleEmailConfirmation(values.email)
         return 
       }
-      toast.error(e.response._data.Error[0]);
+      toast.error(e.response._data.message);
     })
     .finally(() => (loginLoading.value = false));
 }
@@ -309,71 +310,38 @@ async function handleVerifyCode() {
       })
         .then((res) => {
           if (loggedIn.value) {
-            localStorage.setItem('temporaryProfileData' , JSON.stringify(res.data.user))
-            authStore.setProfile(res.data.user);
             authStore.setVerificationData(res.data);
-
-            if (res.data) {
-              if (res.data.user && res.data.user.company_id) {
-                authStore.setRegistrationData({...res.data.user});
-                temporaryToken.value = res.data.token;
-              }
-            }
-            if (
-              !res.data.user.profile_complete &&
-              res.data?.user?.application_type?.name == "broker"
-            ) {
+            authStore.setRegistrationData(res.data);
+            if (!res.data.profile_complete) {
               router.push(localePath("/auth/update-application"));
-            } else if (
-              !res.data.user.profile_complete &&
-              res.data?.user?.application_type?.name == "developer"
-            ) {
-              router.push(localePath("/auth/application-developer"));
-            } else if (res.data?.application_status == "pending") {
-              router.push(localePath("/auth/status"));
-            } else if (
-              res.data?.application_status == "approved" &&
-              (res.data.user.status == "expired" ||
-                res.data.user.status == "training")
-            ) {
-              mlsEgyptToken.value = res.data.token;
-              useCookie("application_status").value =
-                res.data?.application_status;
-              useCookie("status").value = res.data.user?.status;
-
-              useCookie("training_status").value =
-                res.data.user?.training_status &&
-                res.data.user?.training_status;
-
-              router.push(localePath("/auth/status"));
-            } else {
-              mlsEgyptToken.value = res.data.token;
-
+              return
+            }
+            else if(res.data.profile_complete && !res.data.package_pay){
+              authStore.setPendingProfile(res.data)
+              router.push(localePath("/auth/pending"));
+              return
+            } 
+            else {
+              localStorage.setItem('mls_egypt_token', res.data.token);
               localStorage.setItem(
                 "profileData",
-                JSON.stringify(res.data.user),
+                JSON.stringify(res.data),
               );
-
-              temporaryToken.value = null;
-
               router.push(localePath("/profile"));
             }
           } else {
             form.value = "login";
-
             verifyCodeLoading.value = false;
           }
 
           toast.success(i18n.t("TEXTS.codeVerifiedSuccessfully"));
         })
         .catch((e) => {
-          console.error(e);
-
-          console.log(error);
+          console.log(e);
 
           verifyCodeLoading.value = false;
 
-          toast.error(e.response._data.Error[0]);
+          toast.error(Object.values(e.response._data.errors)[0]);
         });
     } else {
       toast.error(i18n.t("ERRORS.enterFullCode"));
@@ -447,11 +415,9 @@ const confirmVerification = async () => {
   })
     .then(() => toast.success(i18n.t("TEXTS.codeVerifiedSuccessfully")))
     .catch((e) => {
-      console.error(e);
-
+      console.log(e);
       verifyCodeLoading.value = false;
-
-      toast.error(e.response._data.Error[0]);
+      toast.error(e.response._data.message);
     });
 };
 watch(

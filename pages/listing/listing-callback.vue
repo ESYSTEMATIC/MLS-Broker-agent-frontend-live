@@ -23,7 +23,7 @@ useHead({
 
 const { locales, locale } = useI18n();
 
-const token = useCookie("mls_egypt_token");
+const token = localStorage.getItem("mls_egypt_token");
 
 const headers = {
   "Accept-Language": locales.value.find((item) => item.code === locale.value)
