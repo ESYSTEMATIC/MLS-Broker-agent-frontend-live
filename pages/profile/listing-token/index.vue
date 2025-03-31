@@ -207,7 +207,7 @@ const headers = {
   "Accept-Language": locales.value.find((item) => item.code === locale.value)
     ?.iso,
   Lang: locale.value,
-  Authorization: `Bearer ${token.value}`,
+  Authorization: `Bearer ${token}`,
 };
 
 const {
@@ -406,19 +406,10 @@ const { data, pending, refresh } = await useAsyncData(
       }
     }
 
-    return $fetch("/paymentTransaction/getByFilter", {
+    return $fetch("/tokens/getByFilter", {
       baseURL,
-      method: "POST",
+      method: "GET",
       headers,
-      body: {
-        page: 1,
-        filters: {
-          payment_transactions,
-        },
-        related_objects: [],
-        related_objects_count: [],
-        page_size: 9999,
-      },
     });
   },
   {

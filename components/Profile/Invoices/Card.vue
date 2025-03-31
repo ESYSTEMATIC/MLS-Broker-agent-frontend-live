@@ -61,7 +61,7 @@
                 </p>
 
                 <p class="text-xs font-medium md:text-sm">
-                  <span v-if="card.purchase_type === 'subscriptionPayment'">
+                  <span v-if="card.purchase_type === 'subscription_fees'">
                     {{ $t("TITLES.membershipPackage") }}
                   </span>
 
@@ -148,7 +148,7 @@
               <tbody>
                 <tr class="text-">
                   <td class="!font-semibold">
-                    <span v-if="card.purchase_type === 'subscriptionPayment'">
+                    <span v-if="card.purchase_type === 'subscription_fees'">
                       {{ $t("TITLES.membershipPackage") }}
                     </span>
 
@@ -270,7 +270,7 @@
 
         <GlobalsSkeleton v-if="loading" class="h-[21px] w-[150px]" />
         <h4 v-else class="font-semibold">
-          <span v-if="card.purchase_type === 'subscriptionPayment'">
+          <span v-if="card.purchase_type === 'subscription_fees'">
             {{ $t("TITLES.membershipPackage") }}
           </span>
 
@@ -336,7 +336,7 @@
 
             <span>
               {{
-                new Date(card.payment_date)
+                new Date(card.created_at)
                   .toLocaleDateString()
                   .toString()
                   .replaceAll("/", "-")
@@ -418,12 +418,14 @@ async function downloadPDF() {
   }
 
   const invoiceDetails = document.getElementById("invoiceDetails");
+
   const clone = invoiceDetails.cloneNode(true);
+
   document.body.appendChild(clone);
 
   let name = "";
 
-  if (props.card.purchase_type === "subscriptionPayment") {
+  if (props.card.purchase_type === "subscription_fees") {
     name = t("TITLES.membershipPackage");
   } else if (
     props.card.purchase_type === "developer" ||

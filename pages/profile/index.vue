@@ -1,39 +1,107 @@
 <template>
-  <div class="flex flex-col my-7 w-full max-md:max-w-full">
-    <!-- <Chat :receiverId="'kimo'"></Chat> -->
-    <section class="max-md:mr-1 max-md:max-w-full">
-        <div class="flex gap-5 max-md:flex-col">
-        <ProfileAgentProfileCard />
-        <AgentDetails />  
-        </div>
-    </section>
+  <div>
+    <div
+      class="mb-6 rounded-2xl bg-white card-shadow px-6 py-4 dark:bg-box-container-dark"
+    >
+      <h3 class="mb-2 text-primary text-2xl font-bold leading-9">
+        {{ $t("TITLES.products_services") }}
+      </h3>
 
-    <ProfileAgentServiceArea />
-    <ProfileAgentCertificates />
-    
-    <!-- <section>
-        <h2 class="self-start mt-14 text-lg font-semibold text-black max-md:mt-10">Active Leads Listing</h2>
-        <div class="flex flex-wrap gap-8 items-center mt-6 max-md:mr-1 max-md:max-w-full">
-        <ProfileAgentPropertyCard v-for="i in 3" :key="i" />
-        </div>
-    </section> -->
+      <p class="text-gray-500 dark:text-gray-300">
+        {{ $t("TITLES.our_recent_services") }}
+      </p>
     </div>
+
+    <div class="bg-white dark:bg-box-container-dark card-shadow rounded-2xl p-5 grid grid-cols-12 gap-8">
+      <div class="order-2 col-span-12 xl:order-1 xl:col-span-12">
+        <div class="mb-7 last:mb-0">
+          <button type="button" class="mb-4 flex items-center gap-2">
+            <img src="/profile/icons/pinned.svg" class="dark:invert" />
+            <span class="text-xl font-semibold capitalize">{{
+              $t("TITLES.pinned")
+            }}</span>
+          </button>
+
+          <div
+            class="flex flex-wrap w-full gap-3"
+          >
+            <div
+              v-for="card in items.flatMap((category) =>
+                category.cards.filter((card) => card.pinned),
+              )"
+              :key="card.id"
+            >
+              <ProfileProductsServicesCard
+                :card="card"
+                class="pinned"
+                @makePinUnPin="makePinUnPin"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div v-for="(item, i) in items" :key="i" class="mb-8 last:mb-0">
+          <button
+            :id="item.id"
+            type="button"
+            class="mb-4 flex items-center gap-2"
+          >
+            <img
+              src="/profile/icons/pinned.svg"
+              class="dark:invert"
+              v-if="item.category == 'pinned'"
+            />
+            <span class="text-xl font-semibold capitalize">{{
+              item.category
+            }}</span>
+          </button>
+
+          <div
+            class="flex flex-wrap w-full gap-3"
+          >
+            <div v-for="card in item.cards" :key="card.id">
+              <ProfileProductsServicesCard
+                :card="card"
+                @makePinUnPin="makePinUnPin"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden order-1 col-span-12 xl:order-2 xl:col-span-3">
+        <div
+          class="sticky top-[15px] flex w-full items-center gap-3 overflow-x-auto pb-2.5 xl:block xl:h-[70vh] xl:overflow-y-auto xl:pb-0"
+        >
+          <!-- <div
+            v-for="cat in items"
+            :key="cat"
+            class="min-w-[300px] xl:mb-4 xl:min-w-full xl:last:mb-0"
+          >
+            <NuxtLink
+              :to="localePath(`/profile/#${cat.id}`)"
+              :class="
+                $route.fullPath.includes(cat.id) ? 'bg-primary text-white' : ''
+              "
+              class="flex w-full items-center justify-center rounded-lg border border-primary py-2 text-center text-xs transition-all xl:text-sm"
+            >
+              {{ cat.category }}
+            </NuxtLink>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import Chat from '~/components/Globals/Chat.vue';
-import AgentDetails from '~/components/Profile/Agent/AgentDetails.vue';
-import { useAuthStore } from '~/store/auth';
-
 definePageMeta({
   layout: "profile",
 });
 
-const authStore = useAuthStore()
 const localePath = useLocalePath();
 
 const { t, locale } = useI18n();
-console.log(authStore.profileData);
 
 useHead({
   title: t("TITLES.products_services"),
@@ -45,7 +113,156 @@ useHead({
   ],
 });
 
+/* Start of the function that fetch data */
+const items = ref([
+  {
+    id: 84315,
+    category: locale.value === "ar" ? "منصة مصر الرقمية" : "Egypt MLS",
+    cards: [
+      {
+        id: "6443455",
+        image: "/profile/04.svg",
+        title: locale.value === "ar" ? "إدارة العملاء" : "CRM",
+        description:
+          locale.value === "ar"
+            ? "إدارة علاقات العملاء"
+            : "Customer Relationship Management",
+        to: "https://egypt.mlsmatrix.com/matrix/login.aspx",
+        pinned: false,
+      },
+      {
+        id: "64434551",
+        image: "/profile/02.svg",
+        title: locale.value === "ar" ? "تقارير السوق" : "Market Reports",
+        description: locale.value === "ar" ? "اتجاهات السوق" : "Market Trends",
+        to: "https://egypt.mlsmatrix.com/Matrix/MarketReports",
+        pinned: false,
+      },
+      {
+        id: "64434552",
+        image: "/profile/03.svg",
+        title: locale.value === "ar" ? "إضافة / تعديل" : "Add / Edit",
+        description: locale.value === "ar" ? "مدير القائمة" : "Listing Manager",
+        to: "https://egypt.mlsmatrix.com/Matrix/AddEdit",
+        pinned: false,
+      },
+    ],
+  },
+  {
+    id: 8415,
+    category:
+      locale.value === "ar"
+        ? "منتجاتنا"
+        : "Egypt MLS Products",
+    cards: [
+      {
+        id: "631",
+        image: "https://www.egymls.com/wp-content/uploads/2024/05/EgyMLS-768x426-1.webp",
+        title: "Egypt MLS",
+        description: "www.egymls.com",
+        to: "https://www.egymls.com/",
+        pinned: false,
+      },
+      {
+        id: "2345",
+        image: "/logo/egypt-platform-logo-light.svg",
+        title: locale.value === "ar" ? "منصة مصر العقارية الحكومية" : "Egyptian Real Estate Platform",
+        description: "realestate.gov.eg",
+        to: "https://realestate.gov.eg",
+        pinned: false,
+      },
+      {
+        id: "2349",
+        image: "/profile/05.svg",
+        title: locale.value === "ar" ? "ابحث عن وكيل" : "Find An Agent",
+        description: "",
+        to: "https://realestate.gov.eg/find-agent",
+        pinned: false,
+      },
+      {
+        id: "2342",
+        image: "/profile/arab-mls-university.png",
+        title: locale.value === "ar" ? "جامعة MLS العربية" : "Arab MLS University In Cairo",
+        description: "Egypt MLS",
+        to: "https://arabmls.org/arab-mls-university/",
+        pinned: false,
+      },
+    ],
+  },
+  {
+    id: 8416,
+    category:
+      locale.value === "ar"
+        ? "منصات التواصل الإجتماعي"
+        : "Egypt MLS Social Media",
+    cards: [
+      {
+        id: "634",
+        image: "/profile/f.png",
+        title: locale.value === "ar" ? "فيسبوك" : "Facebook",
+        description: "Egypt MLS",
+        to: "https://www.facebook.com/EVCFL?mibextid=LQQJ4d",
+        pinned: false,
+      },
+      {
+        id: "2347",
+        image: "/profile/ig.png",
+        title: locale.value === "ar" ? "إنستجرام" : "Instagram",
+        description: "@egypt.mls",
+        to: "https://www.instagram.com/egypt.mls?igsh=MWFrNnFwMmx1a2R3eQ%3D%3D&utm_source=qr",
+        pinned: false,
+      },
+      {
+        id: "23448",
+        image: "/profile/01.svg",
+        title: locale.value === "ar" ? "اكس" : "ْْX",
+        description: "@egyptmls",
+        to: "https://x.com/egyptmls?s=21&t=aWFY1KXraGkeYPe2zpuLUA",
+        pinned: false,
+      },
+      {
+        id: "23441",
+        image: "/profile/in.png",
+        title: locale.value === "ar" ? "لينكدإن" : "Linked in",
+        description: "Egypt MLS",
+        to: "https://www.linkedin.com/company/egypt-mls/",
+        pinned: false,
+      },
+    ],
+  },
+]);
+
+const makePinUnPin = (id) => {
+  items.value.map((cat) => {
+    cat.cards.map((card) => {
+      if (card.id == id) {
+        card.pinned = !card.pinned;
+      }
+    });
+  });
+
+  useCookie("mls_pinned_arr").value = items.value
+    .flatMap((category) => category.cards.filter((card) => card.pinned))
+    .map((el) => el.id);
+};
+
+const resultPinnedArr = ref([]);
+
+watch(
+  () => useCookie("mls_pinned_arr").value,
+  (arr) => {
+    resultPinnedArr.value = arr;
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+);
+
 const axios = useNuxtApp().$axios;
+
+
+/* End of the function that fetch data */
 
 const temporaryToken = useCookie("mls_egypt_temporary_token");
 

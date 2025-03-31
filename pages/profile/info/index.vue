@@ -108,7 +108,7 @@ const communicationPreference = ref([]);
 const updateProfileLoading = ref(true);
 async function handleUpdateProfile() {
   let type =
-    profileData.value.application_type.name == "broker"
+    profileData.value.application_type == "broker"
       ? "broker"
       : "developer";
 

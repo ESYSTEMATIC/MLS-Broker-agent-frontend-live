@@ -60,7 +60,7 @@
       </div>
       
       <div v-if="showType == 'row'">
-        {{ data }}
+        <!-- {{ data }} -->
         <ProfileInvoicesTable v-if="pending" loading :items="[]" />
   
         <ProfileInvoicesTable v-else :items="data" />
@@ -118,7 +118,7 @@ const headers = {
   "Accept-Language": locales.value.find((item) => item.code === locale.value)
     ?.iso,
   Lang: locale.value,
-  Authorization: `Bearer ${token.value}`,
+  Authorization: `Bearer ${token}`,
 };
 
 const {
@@ -165,25 +165,20 @@ const { data, pending } = await useAsyncData(
       }
     }
 
-    return $fetch("/paymentTransaction/getByFilter", {
+    return $fetch(`/paymentTransaction/getByFilter`, {
       baseURL,
-      method: "POST",
-      headers,
-      body: {
-        page: 1,
-        filters: {
-          payment_transactions,
-        },
-        related_objects: [],
-        related_objects_count: [],
-        page_size: 9999,
+      method: "GET",
+      params : {
+          start_date : route.query.start_date ? new Date(route.query.start_date).toISOString().split("T")[0] : null,
+          end_date : route.query.end_date ? new Date(route.query.end_date).toISOString().split("T")[0] : null
       },
+      headers
     }).catch((err) => {
       console.log(err);
     });
   },
   {
-    transform: (res) => res.data.payment_transaction.data,
+    transform: (res) => res.data,
     watch: [() => route.query],
   },
 );

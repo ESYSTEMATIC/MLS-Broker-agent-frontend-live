@@ -105,7 +105,7 @@
               <p class="mb-2 text-xs text-gray-600 dark:text-gray-100">
                 {{ $t("LABELS.invoice_date") }}
               </p>
-
+              <!-- {{ card }} -->
               <p class="text-xs font-medium md:text-sm">
                 {{
                   new Date(card.created_at)
@@ -298,7 +298,7 @@
         </div>
 
         <div class="cell w-[25%]">
-          <span v-if="item.purchase_type === 'subscriptionPayment'">
+          <span v-if="item.purchase_type === 'subscription_fees'">
             {{ $t("TITLES.membershipPackage") }}
           </span>
 
@@ -331,7 +331,7 @@
 
         <div class="cell w-[25%]">
           {{
-            new Date(item.payment_date)
+            new Date(item.created_at)
               .toLocaleDateString()
               .toString()
               .replaceAll("/", "-")
