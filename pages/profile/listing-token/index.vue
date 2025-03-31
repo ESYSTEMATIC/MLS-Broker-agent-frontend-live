@@ -80,15 +80,14 @@
             {{ $t("TITLES.pricePerToken") }}
           </h5>
 
-          <span>{{ price.price }} {{ $t("TITLES.AED") }}</span>
+          <span>{{ price.filter((row) => row.key == 'token_price')[0].value }} {{ $t("TITLES.AED") }}</span>
         </div>
 
         <div class="mb-5 flex items-center justify-between">
           <h5 class="font-medium xl:text-lg">
             {{ $t("TITLES.total") }}
           </h5>
-
-          <span>{{ price.price * tokenQuantity }} {{ $t("TITLES.AED") }}</span>
+          <span>{{ parseInt(price.filter((row) => row.key == 'token_price')[0].value) * tokenQuantity }} {{ $t("TITLES.AED") }}</span>
         </div>
 
         <div class="flex items-center gap-5">
@@ -123,7 +122,7 @@
         <p class="flex flex-wrap items-center gap-2">
           <span>{{ $t("TITLES.token_balance") }}:</span>
 
-          <span>{{ balance ? balance.qty : 0 }}</span>
+          <span>{{ authStore.profileData.token_count }}</span>
         </p>
       </div>
 
@@ -148,14 +147,13 @@
         <template v-if="pending">
           <ProfileTokensCard v-for="i in 15" :key="i" :card="{}" loading />
         </template>
-  
         <ProfileTokensCard
-          v-else-if="data?.length"
-          v-for="(item, i) in data"
-          :key="i"
-          :card="item"
+        v-else-if="data?.length"
+        v-for="(item, i) in data"
+        :key="i"
+        :card="item"
         />
-  
+        
         <p v-else class="col-span-12 text-center">
           {{ $t("TEXTS.noListingTokens") }}
         </p>
@@ -166,6 +164,7 @@
 
 <script setup>
 import { useToast } from "vue-toastification";
+import { useAuthStore } from "~/store/auth";
 
 definePageMeta({
   layout: "profile",
@@ -183,7 +182,7 @@ useHead({
 });
 
 const route = useRoute();
-
+const authStore = useAuthStore()
 const toast = useToast();
 
 const dataFilter = [
@@ -233,19 +232,18 @@ async function handleBuyToken() {
     if (Number(tokenQuantity.value) >= 1) {
       buyTokenLoading.value = true;
 
-      await $fetch("/payment/submitToken", {
+      await $fetch("/tokens/buy", {
         baseURL,
+        method: "POST",
         headers,
-        params: {
-          token_id: price.value.id,
+        body: {
           qty: tokenQuantity.value,
         },
       })
         .then((res) => {
-          currentPaymentTransaction.value = res.data.payment_transaction;
-
+          console.log(res.data);
+          currentPaymentTransaction.value = res.data.session_id;
           startPayment();
-
           openTokensModal.value = false;
         })
         .catch((e) => {
@@ -266,103 +264,42 @@ function startPayment() {
     onPaymentCancel,
   );
 
-  payment.startPayment(currentPaymentTransaction.value.session_id);
+  payment.startPayment(currentPaymentTransaction.value);
 }
 /* End of the function that call the payment gateway */
 
 /* Start of the function that handle the success of the payment */
 async function onPaymentSuccess() {
-  $fetch("/payment/paymentComplete", {
-    baseURL,
-    headers,
-    body: {
-      id: currentPaymentTransaction.value.id,
-      order: {
-        status: "Success",
-        merchantReferenceId: currentPaymentTransaction.value.success_indicator,
-      },
-    },
-    method: "POST",
-  })
-    .then(() => {
-      toast.success(t("TEXTS.paidSuccessfully"));
-
-      refresh();
-
-      refreshBalance();
-    })
-    .catch((e) => {
-      console.error(e);
-
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (currentPaymentTransaction.value = null));
+  toast.success(t("TEXTS.paidSuccessfully"));
+  location.reload()
 }
 /* End of the function that handle the success of the payment */
 
 /* Start of the function that handle the error of the payment */
 async function onPaymentError() {
-  $fetch("/payment/paymentRejected", {
-    baseURL,
-    headers,
-    body: {
-      id: currentPaymentTransaction.value.id,
-    },
-    method: "POST",
-  })
-    .then(() => toast.success(t("TEXTS.paymentFailed")))
-    .catch((e) => {
-      console.error(e);
-
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (currentPaymentTransaction.value = null));
+  toast.success(t("TEXTS.paymentFailed"))
+  currentPaymentTransaction.value = null
 }
 /* End of the function that handle the error of the payment */
 
 /* Start of the function that handle the cancellation of the payment */
 async function onPaymentCancel() {
-  $fetch("/payment/paymentCanceled", {
-    baseURL,
-    headers,
-    body: {
-      id: currentPaymentTransaction.value.id,
-    },
-    method: "POST",
-  })
-    .then(() => toast.success(t("TEXTS.paymentCancelled")))
-    .catch((e) => {
-      console.error(e);
-
-      toast.error(e.response._data.Error[0]);
-    })
-    .finally(() => (currentPaymentTransaction.value = null));
+  toast.success(t("TEXTS.paymentCancelled"))
+  currentPaymentTransaction.value = null
 }
 /* End of the function that handle the cancellation of the payment */
 /* End of the function that handle buy token */
 
-/* Start of function that get the token price */
-const { data: price, pending: pricePending } = await useFetch(
-  "/token/getPrice",
-  {
-    baseURL,
-    headers,
-    transform: (res) => res.data.token,
-  },
-);
-/* End of the function that get the token price */
 
-/* Start of the function that get the tokens balance */
 const {
-  data: balance,
-  pending: balancePending,
-  refresh: refreshBalance,
-} = await useFetch("/token/getBalance", {
+  data: price,
+  pending: pricePending,
+  refresh: refreshPrices,
+} = await useFetch("/all/prices", {
   baseURL,
   headers,
-  transform: (res) => res.data.user_token_balance,
+  transform: (res) => res.data,
 });
-/* End of the function that get the tokens balance */
 
 /* Start of the function that fetch data */
 function getDate(d) {
@@ -414,7 +351,7 @@ const { data, pending, refresh } = await useAsyncData(
   },
   {
     watch: [() => route.query],
-    transform: (res) => res.data.payment_transaction.data,
+    transform: (res) => res.data,
   },
 );
 /* End of the function that fetch data */

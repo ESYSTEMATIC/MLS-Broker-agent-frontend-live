@@ -1,6 +1,6 @@
 <template>
   <div
-    class=" bg-[url('/bgPending.png')] bg-no-repeat min-h-screen"
+    class="broker-app-container bg-no-repeat min-h-screen"
     :class="locale == 'en' ? 'bg-right-bottom' : 'bg-left-bottom'"
   >
     <div class="h-[100px] flex items-center ms-10">
@@ -28,4 +28,9 @@
 const { locale } = useI18n();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.broker-app-container{
+  background-image: url(/globals/pattern.png);
+  background-size: cover;
+}
+</style>

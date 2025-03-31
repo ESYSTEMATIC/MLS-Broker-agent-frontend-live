@@ -1,8 +1,8 @@
 <script setup></script>
 
 <template>
-  <div class="relative flex h-screen items-center justify-center">
-    <ClientOnly>
+  <div class="relative broker-app-container flex  h-screen items-center justify-center">
+    <!-- <ClientOnly>
       <img
         v-if="$colorMode.value === 'light'"
         class="pointer-events-none absolute start-0 top-0 size-full select-none object-cover"
@@ -18,10 +18,17 @@
         alg="auth-bg"
         :draggable="false"
       />
-    </ClientOnly>
+    </ClientOnly> -->
 
     <div class="container flex items-center justify-center">
       <slot />
     </div>
   </div>
 </template>
+<style>
+
+.broker-app-container{
+  background-image: url(/globals/pattern.png);
+  background-size: cover;
+}
+</style>

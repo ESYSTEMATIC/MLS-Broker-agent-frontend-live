@@ -1,7 +1,7 @@
 <template>
   <div
-    class="profile-layout relative flex font-poppins"
-    :class="isSmall ? '' : 'my-4 mx-4 md:my-6 md:mx-3'"
+    class="profile-layout broker-app-container relative flex font-poppins"
+    :class="isSmall ? '' : 'py-4 md:py-6'"
   >
     <transition name="translateXIn">
       <div
@@ -22,7 +22,7 @@
     </transition>
 
     <div
-      class="bg-white rounded-2xl min-h-[94vh] p-7 transition-all dark:bg-boxDB-dark"
+      class="bg-white rounded-2xl mx-3 min-h-[94vh] p-7 transition-all dark:bg-boxDB-dark"
       :class="!isSmall
           ? 'ms-[85px] w-[calc(100%-85px)] md:ms-[345px] md:w-[calc(100%-256px)]'
           : 'ms-0 w-full'">
@@ -34,7 +34,9 @@
 
 <script setup>
 import { useStore } from "@/store/index.js";
+import { useAuthStore } from "~/store/auth";
 const store = useStore();
+const authStore = useAuthStore();
 const route = useRoute();
 
 const isMedium = computed(() => store.isMedium);
@@ -50,6 +52,13 @@ const showIsMedium = () => {
     store.setIsShown(true);
   }
 };
+const axios = useNuxtApp().$axios;
+
+const getProfileData = () => {
+  axios.get("/profile").then((res) => {
+    authStore.setProfile(res.data.data);
+  });
+}
 
 const showIsSmall = () => {
   if (window.innerWidth <= 640) {
@@ -75,6 +84,7 @@ watch(
   { deep: true },
 );
 onMounted(() => {
+  getProfileData();
   showIsMedium();
   showIsSmall();
   window.addEventListener("resize", () => {
@@ -115,6 +125,10 @@ body {
   }
 }
 
+.broker-app-container{
+  background-image: url(/globals/pattern.png);
+  background-size: cover;
+}
 [dir="rtl"] {
   .translateXIn-enter-active,
   .translateXIn-leave-active {

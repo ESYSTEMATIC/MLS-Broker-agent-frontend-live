@@ -221,13 +221,13 @@ const sideLinks = [
   //   to: "/profile/contacts",
   //   type: "link",
   // },
-  // {
-  //   name: t("NAV.reviewRequests"),
-  //   icon: "/profile/icons/sidebar/dashboard.svg",
-  //   activeIcon: "/profile/icons/sidebar/dashboard-active.svg",
-  //   to: "/profile/reviews",
-  //   type: "link",
-  // },
+  {
+    name: t("NAV.reviewRequests"),
+    icon: "/profile/icons/sidebar/dashboard.svg",
+    activeIcon: "/profile/icons/sidebar/dashboard-active.svg",
+    to: "/profile/reviews",
+    type: "link",
+  },
   // {
   //   name: t("NAV.reports"),
   //   icon: "/profile/icons/sidebar/dashboard.svg",

@@ -19,7 +19,7 @@
         v-else
         class="flex aspect-auto min-h-9 min-w-9 w-fit items-center justify-center rounded-[50%] border-2 border-[#F01E1E] text-primary object-contain pt-[1px] font-medium"
       >
-        {{ card.quantity }}
+        {{ card.token_counts }}
       </p>
     </div>
 
@@ -42,11 +42,11 @@
         </p>
       </div>
 
-      <GlobalsSkeleton v-if="loading" class="h-[21px] w-[100px]" />
+      <!-- <GlobalsSkeleton v-if="loading" class="h-[21px] w-[100px]" />
       <p v-else class="text-xl font-bold text-[#008000]">
         {{ card.total_price.toLocaleString() }}
         {{ $t("TITLES.AED") }}
-      </p>
+      </p> -->
     </div>
 
     <div v-if="!loading" class="hovered-bg" />

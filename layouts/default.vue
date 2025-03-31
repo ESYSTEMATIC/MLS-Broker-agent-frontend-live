@@ -8,7 +8,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen broker-app-container">
     <!-- <NavigationNavbar /> -->
 
     <slot />
@@ -16,3 +16,9 @@ onMounted(() => {
     <!-- <Footer /> -->
   </div>
 </template>
+<style>
+.broker-app-container{
+  background-image: url(/globals/pattern.png);
+  background-size: cover;
+}
+</style>

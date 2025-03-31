@@ -11,6 +11,8 @@
           {{ $t("TITLES.your_reviews_requests") }}
         </p>
       </div>
+
+      {{ data }}
   
       <div class="rounded-2xl light:bg-white card-shadow px-6 py-4">
         <div class="mb-6">
@@ -53,24 +55,6 @@
       key: "keyword",
       placeholder: t("LABELS.search") + " " + t("TITLES.reviews"),
     },
-    // {
-    //   name: "email",
-    //   type: "search",
-    //   key: "keyword",
-    //   placeholder: t("LABELS.search") + " " + t("TITLES.email"),
-    // },
-    // {
-    //   name: "date_from",
-    //   type: "date",
-    //   key: "start_date",
-    //   placeholder: t("LABELS.date_from"),
-    // },
-    // {
-    //   name: "date_to",
-    //   type: "date",
-    //   key: "end_date",
-    //   placeholder: t("LABELS.date_to"),
-    // },
   ];
   
   const showType = ref("grid");
@@ -82,7 +66,7 @@
     "Accept-Language": locales.value.find((item) => item.code === locale.value)
       ?.iso,
     Lang: locale.value,
-    Authorization: `Bearer ${token.value}`,
+    Authorization: `Bearer ${token}`,
   };
   
   const {
@@ -103,54 +87,23 @@
     return `${fullYear}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
   }
   
-//   const { data, pending } = await useAsyncData(
-//     "invoices",
-//     () => {
-//       const payment_transactions = {
-//         operator: "and",
-//         payment_status: "approved",
-//       };
+  const { data, pending } = await useAsyncData(
+    "request-reviews",
+    () => {
   
-//       if (route.query.start_date || route.query.end_date) {
-//         payment_transactions["created_at"] = {};
-  
-//         if (route.query.start_date) {
-//           payment_transactions["created_at"]["from"] = getDate(
-//             route.query.start_date,
-//           );
-  
-//           payment_transactions["created_at"]["to"] = route.query.end_date
-//             ? getDate(route.query.end_date)
-//             : getDate();
-//         } else {
-//           payment_transactions["created_at"]["from"] = payment_transactions[
-//             "created_at"
-//           ]["to"] = getDate(route.query.end_date);
-//         }
-//       }
-  
-//       return $fetch("/paymentTransaction/getByFilter", {
-//         baseURL,
-//         method: "POST",
-//         headers,
-//         body: {
-//           page: 1,
-//           filters: {
-//             payment_transactions,
-//           },
-//           related_objects: [],
-//           related_objects_count: [],
-//           page_size: 9999,
-//         },
-//       }).catch((err) => {
-//         console.log(err);
-//       });
-//     },
-//     {
-//       transform: (res) => res.data.payment_transaction.data,
-//       watch: [() => route.query],
-//     },
-//   );
+      return $fetch("/request-reviews", {
+        baseURL,
+        method: "GET",
+        headers,
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    {
+      transform: (res) => res.data.data,
+      watch: [() => route.query],
+    },
+  );
 
 
   /* End of the function that fetch data */

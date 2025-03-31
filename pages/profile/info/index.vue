@@ -83,23 +83,23 @@ const initialValues = ref({});
 
 const schema = yup.object().shape({
   fullName: yup.string().required(i18n.t("ERRORS.fullNameRequired")),
-  address: yup.string().required(i18n.t("ERRORS.addressRequired")),
+  // address: yup.string().required(i18n.t("ERRORS.addressRequired")),
   phoneNumber: yup.string().required(i18n.t("ERRORS.phoneNumberRequired")),
-  faxNumber: yup.string().required(i18n.t("ERRORS.faxNumberRequired")),
+  // faxNumber: yup.string().required(i18n.t("ERRORS.faxNumberRequired")),
   email: yup
     .string()
     .required(i18n.t("ERRORS.emailRequired"))
     .email(i18n.t("ERRORS.invalidEmail")),
   status: yup.string().required(i18n.t("ERRORS.statusRequired")),
-  officeName: yup.string().required(i18n.t("ERRORS.officeNameRequired")),
-  officeAddress: yup.string().required(i18n.t("ERRORS.officeAddressRequired")),
-  directPhoneNumber: yup
-    .string()
-    .required(i18n.t("ERRORS.phoneNumberRequired")),
-  officeTaxId: yup.string().required(i18n.t("ERRORS.taxIdRequired")),
-  commercialRegistration: yup
-    .string()
-    .required(i18n.t("ERRORS.commercialRegistrationRequired")),
+  // officeName: yup.string().required(i18n.t("ERRORS.officeNameRequired")),
+  // officeAddress: yup.string().required(i18n.t("ERRORS.officeAddressRequired")),
+  // directPhoneNumber: yup
+  //   .string()
+  //   .required(i18n.t("ERRORS.phoneNumberRequired")),
+  // officeTaxId: yup.string().required(i18n.t("ERRORS.taxIdRequired")),
+  // commercialRegistration: yup
+  //   .string()
+  //   .required(i18n.t("ERRORS.commercialRegistrationRequired")),
   mlsID: yup.string().required(i18n.t("ERRORS.mlsIDRequired")),
 });
 
@@ -111,52 +111,25 @@ async function handleUpdateProfile() {
     profileData.value.application_type == "broker"
       ? "broker"
       : "developer";
-
-  if (type == "broker") {
+  console.log(profileData.value);
+  
     initialValues.value = {
       mlsID: profileData.value.mls_id,
       fullName: profileData.value.name,
-      address: profileData.value.broker.brokerage_address,
-      phoneNumber: profileData.value.broker.brokerage_phone_number,
-      faxNumber: profileData.value.broker.brokerage_fax_number,
+      phoneNumber: profileData.value.phone,
+      // faxNumber: profileData.value.broker.brokerage_fax_number,
       email: profileData.value.email,
-      status: profileData.value.status == "active" ? "1" : "0",
-      officeName: profileData.value.broker.name,
-      officeAddress: profileData.value.broker.principal_place_of_business,
-      directPhoneNumber:
-        profileData.value.broker.country_code_direct_phone_number +
-        " " +
-        profileData.value.broker.direct_phone_number,
-      officeTaxId: profileData.value.broker.brokerage_tax_id,
-      commercialRegistration:
-        profileData.value.broker.brokerage_commercial_registration,
+      status: profileData.value.approved ? "1" : "0",
+      // officeName: profileData.value.broker.name,
+      // officeAddress: profileData.value.broker.principal_place_of_business,
+      // directPhoneNumber:
+      //   profileData.value.broker.country_code_direct_phone_number +
+      //   " " +
+      //   profileData.value.broker.direct_phone_number,
+      // officeTaxId: profileData.value.broker.brokerage_tax_id,
+      // commercialRegistration:
+      //   profileData.value.broker.brokerage_commercial_registration,
     };
-  } else if (type == "developer") {
-    initialValues.value = {
-      mlsID: profileData.value.mls_id,
-      fullName: profileData.value.name,
-      address: profileData.value.developer.office_address,
-      phoneNumber:
-        profileData.value.developer.country_code_phone +
-        " " +
-        profileData.value.developer.office_phone_number,
-      faxNumber:
-        profileData.value.developer.country_code_office_fax_number +
-        " " +
-        profileData.value.developer.office_fax_number,
-      email: profileData.value.email,
-      status: profileData.value.status == "active" ? "1" : "0",
-      officeName: profileData.value.developer.name,
-      officeAddress: profileData.value.developer.office_address,
-      directPhoneNumber:
-        profileData.value.developer.country_code_direct_phone_number +
-        " " +
-        profileData.value.developer.direct_phone_number,
-      officeTaxId: profileData.value.developer.office_tax_id,
-      commercialRegistration:
-        profileData.value.developer.office_commercial_registration,
-    };
-  }
 
   if (+profileData.value.contact_via_phone) {
     communicationPreference.value.push("phone");
@@ -313,9 +286,8 @@ async function handleUpdatePassword(values) {
 
       <p class="font-light">{{ $t("TEXTS.allYourFilledData") }}</p>
     </div>
-
     <VeeForm
-      v-if="!updateProfileLoading"
+      v-if="!updateProfileLoading && profileData"
       as="div"
       :validation-schema="schema"
       :initial-values="initialValues"
@@ -391,7 +363,7 @@ async function handleUpdatePassword(values) {
           disabled
           class="col-span-12 xl:col-span-6"
         />
-
+<!-- 
         <InputsBaseInput
           id="address"
           type="address"
@@ -401,7 +373,7 @@ async function handleUpdatePassword(values) {
           dark
           disabled
           class="col-span-12 xl:col-span-6"
-        />
+        /> -->
 
         <InputsBaseInput
           id="phoneNumber"
@@ -414,7 +386,7 @@ async function handleUpdatePassword(values) {
           class="col-span-12 xl:col-span-6"
         />
 
-        <InputsBaseInput
+        <!-- <InputsBaseInput
           id="faxNumber"
           name="faxNumber"
           isNumber
@@ -423,7 +395,7 @@ async function handleUpdatePassword(values) {
           dark
           disabled
           class="col-span-12 xl:col-span-6"
-        />
+        /> -->
 
         <InputsBaseInput
           id="email"
@@ -450,11 +422,11 @@ async function handleUpdatePassword(values) {
           class="col-span-12 xl:col-span-6"
           defaultValue="Active"
         />
-
+<!-- 
         <h5 class="col-span-12 my-3 font-bold">
           {{ $t("TITLES.myBrokerage") }}
-        </h5>
-
+        </h5> -->
+<!-- 
         <InputsBaseInput
           id="officeName"
           name="officeName"
@@ -475,8 +447,8 @@ async function handleUpdatePassword(values) {
           dark
           disabled
           class="col-span-12 xl:col-span-6"
-        />
-
+        /> -->
+<!-- 
         <InputsBaseInput
           id="officePhoneNumber"
           name="directPhoneNumber"
@@ -486,9 +458,9 @@ async function handleUpdatePassword(values) {
           dark
           disabled
           class="col-span-12 xl:col-span-6"
-        />
+        /> -->
 
-        <InputsBaseInput
+        <!-- <InputsBaseInput
           id="officeTaxId"
           name="officeTaxId"
           :label="$t('LABELS.officeTaxId')"
@@ -506,7 +478,7 @@ async function handleUpdatePassword(values) {
           dark
           disabled
           class="col-span-12 xl:col-span-6"
-        />
+        /> -->
 
         <!-- <h5 class="col-span-12 mt-3 font-bold">
           {{ $t("TITLES.marketingCommunicationPreferences") }}

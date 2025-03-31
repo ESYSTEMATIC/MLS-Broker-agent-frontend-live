@@ -11,6 +11,7 @@ export const useAuthStore = defineStore("auth", {
   getters: {},
 
   actions: {
+    
     setProfile(payload) {
       this.profileData = payload;
     },
