@@ -74,7 +74,7 @@
                     {{ $t("TITLES.application") }}
                   </span>
 
-                  <span v-else-if="card.purchase_type === 'token'">
+                  <span v-else-if="card.purchase_type === 'buy_tokens'">
                     {{ $i18n.locale === "ar" ? "رمز" : "Token" }}
                   </span>
 
@@ -161,7 +161,7 @@
                       {{ $t("TITLES.application") }}
                     </span>
 
-                    <span v-else-if="card.purchase_type === 'token'">
+                    <span v-else-if="card.purchase_type === 'buy_tokens'">
                       {{ $i18n.locale === "ar" ? "رمز" : "Token" }}
                     </span>
 
@@ -283,7 +283,7 @@
             {{ $t("TITLES.application") }}
           </span>
 
-          <span v-else-if="card.purchase_type === 'token'">
+          <span v-else-if="card.purchase_type === 'buy_tokens'">
             {{ $i18n.locale === "ar" ? "رمز" : "Token" }}
           </span>
 

@@ -347,6 +347,10 @@ const { data, pending, refresh } = await useAsyncData(
       baseURL,
       method: "GET",
       headers,
+      params : {
+        start_date : route.query.start_date ? new Date(route.query.start_date).toISOString().split("T")[0] : null,
+        end_date : route.query.end_date ? new Date(route.query.end_date).toISOString().split("T")[0] : null
+      }
     });
   },
   {

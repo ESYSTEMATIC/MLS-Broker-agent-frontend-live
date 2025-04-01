@@ -6,20 +6,27 @@
       <div class="t-head">
   
         <div class="cell w-[25%]">
-          {{ $t("LABELS.image") }}
+          {{ $t("LABELS.user_name") }}
+        </div>
+        <div class="cell w-[25%]">
+          {{ $t("LABELS.user_image") }}
         </div>
   
         <div class="cell w-[25%]">
-          {{ $t("LABELS.name") }}
+          {{ $t("LABELS.message") }}
         </div>
   
         <div class="cell w-[25%]">
-          {{ $t("LABELS.userType") }}
+          {{ $t("LABELS.status") }}
         </div>
   
-        <div class="cell w-[15%]">
+        <div class="cell w-[25%]">
+          {{ $t("LABELS.created_at") }}
+        </div>
+  
+        <!-- <div class="cell w-[15%]">
           {{ $t("LABELS.comment") }}
-        </div>
+        </div> -->
         <div class="cell w-[15%]">
           {{ $t("LABELS.stars") }}
         </div>
@@ -45,37 +52,37 @@
             <GlobalsSkeleton class="h-[21px] w-[5%]" />
           </div>
         </template>
-  
+        
         <div
-          v-else-if="items.length"
-          class="t-body group"
-          v-for="(item, idx) in items"
-          :key="item"
+        v-else-if="items.length"
+        class="t-body group"
+        v-for="(item, idx) in items"
+        :key="item"
         >
-          <!-- <div class="cell w-[5%]">
-            {{ item.id }}
+          <div class="cell w-[20%]">
+            {{ item.user_name }}
           </div>
-   -->
+          <div class="cell flex w-[10%]">
+            <img :src="item.user_image" class=" w-[100px] rounded h-[80px] object-cover" alt="">
+          </div>
+  
           <div class="cell w-[25%]">
-            <span v-if="item.purchase_type === 'subscriptionPayment'">
-              {{ $t("TITLES.membershipPackage") }}
-            </span>
-  
-            <span
-              v-else-if="
-                item.purchase_type === 'developer' ||
-                item.purchase_type === 'broker'
-              "
-            >
-              {{ $t("TITLES.application") }}
-            </span>
-  
-            <span v-else-if="item.purchase_type === 'token'">
-              {{ $i18n.locale === "ar" ? "رمز" : "Token" }}
+            <span v-if="item.message">
+              {{ item.message }}
             </span>
   
             <span v-else>
               {{ $t("TEXTS.notFound") }}
+            </span>
+          </div>
+  
+          <div class="cell w-[5%]">
+            <span v-if="item.is_rate">
+              {{ $t("BUTTONS.rated") }}
+            </span>
+            
+            <span v-else>
+              {{ $t("BUTTONS.pending") }}
             </span>
           </div>
   
@@ -88,17 +95,8 @@
             }}
           </div>
   
-          <div class="cell w-[25%]">
-            {{
-              new Date(item.payment_date)
-                .toLocaleDateString()
-                .toString()
-                .replaceAll("/", "-")
-            }}
-          </div>
-  
-          <div class="cell w-[15%]">
-            {{ item.quantity }}
+          <div class="cell w-[5%]">
+            {{ item.rate }}
           </div>
   
 
