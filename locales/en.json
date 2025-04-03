@@ -188,6 +188,7 @@
   "TEXTS": {
     "homeText": "Synchronize Real Estate Management - Say Goodbye to Dispersed Data!",
     "noContacts": "There are no contacts!",
+    "banned": "Your Account Is Banned!",
     "paymentSuccess": "Payment has been done successfully!",
     "pendingApproval": "Your application has been submitted successfully and is currently under review by the administration team. You will be notified once the approval process is complete. Thank you for your patience.",
     "appFeesPending": "Your profile registration is pending approval. Please complete the payment of the application fees to proceed with the approval process and successfully register your profile.",

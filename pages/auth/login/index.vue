@@ -312,6 +312,12 @@ async function handleVerifyCode() {
           if (loggedIn.value) {
             authStore.setVerificationData(res.data);
             authStore.setRegistrationData(res.data);
+            if(res.data.is_ban){
+              toast.error(i18n.t("TEXTS.banned"));
+              verifyCodeLoading.value = false;
+              form.value = "login";
+              return
+            }
             if (!res.data.profile_complete) {
               router.push(localePath("/auth/update-application"));
               return

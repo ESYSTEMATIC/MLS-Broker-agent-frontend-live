@@ -34,10 +34,12 @@
 
 <script setup>
 import { useStore } from "@/store/index.js";
+import { useToast } from "vue-toastification";
 import { useAuthStore } from "~/store/auth";
 const store = useStore();
 const authStore = useAuthStore();
 const route = useRoute();
+const i18n = useI18n();
 
 const isMedium = computed(() => store.isMedium);
 const isHovered = computed(() => store.isHovered);
@@ -53,9 +55,17 @@ const showIsMedium = () => {
   }
 };
 const axios = useNuxtApp().$axios;
+const toast = useToast()
+const {push} = useRouter()
 
 const getProfileData = () => {
   axios.get("/profile").then((res) => {
+    if(res.data.data.is_ban){
+      toast.error(i18n.t("TEXTS.banned"));
+      localStorage.removeItem("mls_egypt_token");
+      push('/auth/login')
+      return
+    }
     authStore.setProfile(res.data.data);
   });
 }
