@@ -131,48 +131,6 @@ function getDate(d) {
 
 const axios = useNuxtApp().$axios;
 
-const { data, pending } = await useAsyncData(
-  "membership",
-  () => {
-    const payment_transactions = {
-      purchase_type: "token",
-      operator: "and",
-      payment_status: "approved",
-    };
-
-    if (route.query.start_date || route.query.end_date) {
-      payment_transactions["created_at"] = {};
-
-      if (route.query.start_date) {
-        payment_transactions["created_at"]["from"] = getDate(
-          route.query.start_date,
-        );
-
-        payment_transactions["created_at"]["to"] = route.query.end_date
-          ? getDate(route.query.end_date)
-          : getDate();
-      } else {
-        payment_transactions["created_at"]["from"] = payment_transactions[
-          "created_at"
-        ]["to"] = getDate(route.query.end_date);
-      }
-    }
-
-    return axios.post("/membership/packages/getByFilter", {
-      page: 1,
-      related_objects: [],
-      related_objects_count: [],
-      page_size: 999,
-      filters: {
-        payment_transactions,
-      },
-    });
-  },
-  {
-    watch: [() => route.query],
-    transform: (res) => res.data.data.package.data,
-  },
-);
 /* End of the function that fetch data */
 </script>
 

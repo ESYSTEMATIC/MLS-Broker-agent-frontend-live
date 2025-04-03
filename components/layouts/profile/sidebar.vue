@@ -257,13 +257,13 @@ const sideLinks = [
   //   to: "",
   //   type: "link",
   // },
-  {
-    name: t("NAV.membership_renewal"),
-    icon: "/profile/icons/sidebar/medal.svg",
-    activeIcon: "/profile/icons/sidebar/medal-active.svg",
-    to: "/profile/membership-renewal",
-    type: "link",
-  },
+  // {
+  //   name: t("NAV.membership_renewal"),
+  //   icon: "/profile/icons/sidebar/medal.svg",
+  //   activeIcon: "/profile/icons/sidebar/medal-active.svg",
+  //   to: "/profile/membership-renewal",
+  //   type: "link",
+  // },
   {
     name: t("NAV.help"),
     icon: "/profile/icons/sidebar/faq.svg",

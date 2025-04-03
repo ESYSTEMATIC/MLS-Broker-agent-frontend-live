@@ -276,6 +276,8 @@
     "last_message": "Last Message",
     "userType": "User Type",
     "comment": "Comment",
+    "languages": "Languages",
+    "selectLanguages": "Select your languages..",
     "user_name": "User Name",
     "user_image": "Image",
     "created_at": "Created At",
@@ -372,7 +374,7 @@
     "searchUsersPlaceholder": "Search for users using name, email or phone..",
     "commercial": "commercial",
     "writeMessage": "Write Your Message..",
-    
+    "selectLanguages": "Select your languages..",
     "lNamePlaceholder": "Enter Last Name",
     "phoneNumberPlaceholder": "Enter Phone Number",
     "emailPlaceholder": "Enter Email",

@@ -53,17 +53,15 @@ async function handleChange(e) {
         .then((res) => {
           toast.success(i18n.t("TEXTS.profileImageHasBeenUpdatedSuccessfully"));
 
-          profileImage.value = res.data.data.User.image;
-
           profileData.value = {
             ...profileData.value,
-            image: profileImage.value,
           };
 
           localStorage.setItem(
             "profileData",
             JSON.stringify(profileData.value),
           );
+          location.reload()
         })
         .catch((e) => {
           console.error(e);

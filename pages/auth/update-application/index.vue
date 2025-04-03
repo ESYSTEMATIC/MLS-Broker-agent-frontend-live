@@ -195,6 +195,15 @@
           </div>
 
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
+            <InputsMultipleSelect
+              id="languages" is_multiple 
+              name="languages"
+              :options="languages"
+              :label="$t('LABELS.languages')"
+              :placeholder="$t('INPUTS.selectLanguages')"
+            />
+          </div>
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <InputsValidSelect
               id="nationality"
               name="nationality"
@@ -923,6 +932,52 @@ const toast = useToast();
 
 const authStore = useAuthStore();
 
+const languages = ref([
+  { id: "Arabic", name: "Arabic" },
+  { id: "English", name: "English" },
+  { id: "Spanish", name: "Spanish" },
+  { id: "French", name: "French" },
+  { id: "Chinese (Mandarin)", name: "Chinese (Mandarin)" },
+  { id: "Hindi", name: "Hindi" },
+  { id: "Bengali", name: "Bengali" },
+  { id: "Portuguese", name: "Portuguese" },
+  { id: "Russian", name: "Russian" },
+  { id: "Japanese", name: "Japanese" },
+  { id: "German", name: "German" },
+  { id: "Korean", name: "Korean" },
+  { id: "Turkish", name: "Turkish" },
+  { id: "Italian", name: "Italian" },
+  { id: "Dutch", name: "Dutch" },
+  { id: "Greek", name: "Greek" },
+  { id: "Swedish", name: "Swedish" },
+  { id: "Polish", name: "Polish" },
+  { id: "Hebrew", name: "Hebrew" },
+  { id: "Thai", name: "Thai" }
+])
+
+const languageMapper = {
+  "Arabic": "العربية",
+  "English": "الإنجليزية",
+  "Spanish": "الإسبانية",
+  "French": "الفرنسية",
+  "Chinese (Mandarin)": "الصينية (الماندرين)",
+  "Hindi": "الهندية",
+  "Bengali": "البنغالية",
+  "Portuguese": "البرتغالية",
+  "Russian": "الروسية",
+  "Japanese": "اليابانية",
+  "German": "الألمانية",
+  "Korean": "الكورية",
+  "Turkish": "التركية",
+  "Italian": "الإيطالية",
+  "Dutch": "الهولندية",
+  "Greek": "اليونانية",
+  "Swedish": "السويدية",
+  "Polish": "البولندية",
+  "Hebrew": "العبرية",
+  "Thai": "التايلاندية"
+};
+
 const checkRegisterStep = computed(() => {
   if (Object.keys(authStore.registrationData).length) {
     if (authStore.registrationData.register_complete_step === 0) {
@@ -1201,6 +1256,8 @@ async function handlePrinciplesBroker(values) {
   step.value = 3;
 
   allValues.value = { ...allValues.value, ...values };
+  console.log(allValues.value, "allValues.value");
+  
 
   principlesInitialValues.value = {
     fName: values.fName,
@@ -1309,6 +1366,8 @@ async function handleSignature(values) {
   frmData.append("nationality", allValues.value.nationality);
   frmData.append("gender", allValues.value.gender);
   frmData.append("national_id", allValues.value.nationalId);
+  frmData.append("languages_en", allValues.value.languages.join(', '));
+  frmData.append("languages_ar", allValues.value.languages.map((lang) => lang = languageMapper[lang]).join(', '));
   frmData.append("way_of_communication", allValues.value.communicationWay);
   frmData.append(
     "is_office_principal",1
